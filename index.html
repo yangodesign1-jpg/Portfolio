@@ -413,22 +413,25 @@ p{margin:0}
 .contact .c-big{font-family:"Inter Tight","Heebo",sans-serif;font-weight:800;text-transform:uppercase;font-size:clamp(64px,9.4vw,168px);line-height:.88;letter-spacing:-.035em;margin:0;color:var(--c-fg)}
 [lang=he] .contact .c-big,.contact .c-big:lang(he){font-family:"Heebo",sans-serif;letter-spacing:-.02em;line-height:.95}
 .c-sub{font:400 clamp(16px,1.25vw,19px)/1.5 "Inter Tight","Heebo",sans-serif;color:var(--c-dim);max-width:34em;margin:clamp(32px,3.4vw,52px) 0 clamp(28px,2.6vw,40px)}
-/* segmented row: three joined cells; on hover the cell fills from below and a small second line rises in */
-.seg{display:flex;width:max-content;max-width:100%;border:1px solid var(--c-line);border-radius:4px}
-.sg{position:relative;overflow:hidden;isolation:isolate;display:grid;place-items:center;min-width:clamp(150px,13vw,210px);height:64px;padding:0 24px;font:600 13px/1 "Inter Tight","Heebo",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--c-fg);text-decoration:none;background:none;border:0;cursor:pointer;transition:color .35s cubic-bezier(.2,.7,.2,1)}
-.sg+.sg{border-inline-start:1px solid var(--c-line)}
-.sg::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--c-fg);transform:translateY(101%);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+/* segmented row, like the video: light cells with thin grey lines and plain black caps; on hover a black ink fill
+   rises from below with a soft curved edge (like liquid), the text turns white, and a small second line appears */
+.contact{--sg-bg:rgba(255,255,255,.78);--sg-line:rgba(12,26,61,.12);--sg-ink:#111;--sg-txt:#111;--sg-on:#fff}
+:root[data-theme="dark"] .contact{--sg-bg:rgba(255,255,255,.06);--sg-line:rgba(238,242,250,.16);--sg-ink:#F4F3F1;--sg-txt:#EEF2FA;--sg-on:#111}
+.seg{display:flex;width:max-content;max-width:100%;background:var(--sg-bg);border:1px solid var(--sg-line);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.sg{position:relative;overflow:hidden;isolation:isolate;display:grid;place-items:center;min-width:clamp(170px,14vw,230px);height:64px;padding:0 24px;font:500 14px/1 "Inter Tight","Heebo",sans-serif;letter-spacing:.02em;text-transform:uppercase;color:var(--sg-txt);text-decoration:none;background:none;border:0;cursor:pointer;transition:color .3s ease .05s}
+.sg+.sg{border-inline-start:1px solid var(--sg-line)}
+.sg::before{content:"";position:absolute;z-index:-1;left:-30%;width:160%;top:105%;height:260%;border-radius:50%;background:var(--sg-ink);transition:top .55s cubic-bezier(.3,.6,.2,1),border-radius .55s cubic-bezier(.3,.6,.2,1)}
 .sg-t,.sg-s{grid-area:1/1;transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .3s}
-.sg-s{font-size:11px;letter-spacing:.04em;font-weight:500;opacity:0;transform:translateY(14px);text-transform:none}
+.sg-s{font-size:10px;letter-spacing:.06em;font-weight:500;opacity:0;transform:translateY(16px);text-transform:none}
 .sg-s.ltr{direction:ltr;unicode-bidi:isolate}
-.sg:focus-visible{outline:2px solid var(--c-fg);outline-offset:3px}
+.sg:focus-visible{outline:2px solid var(--sg-txt);outline-offset:3px}
 @media (hover:hover){
-  .sg:hover,.sg:focus-visible{color:var(--c-on)}
-  .sg:hover::before,.sg:focus-visible::before{transform:none}
-  .sg:hover .sg-t,.sg:focus-visible .sg-t{transform:translateY(-7px)}
-  .sg:hover .sg-s,.sg:focus-visible .sg-s{opacity:.75;transform:translateY(12px)}
+  .sg:hover,.sg:focus-visible{color:var(--sg-on)}
+  .sg:hover::before,.sg:focus-visible::before{top:-80%;border-radius:40%}
+  .sg:hover .sg-t,.sg:focus-visible .sg-t{transform:translateY(-6px)}
+  .sg:hover .sg-s,.sg:focus-visible .sg-s{opacity:.7;transform:translateY(13px)}
 }
-.sg.done::before{transform:none}.sg.done{color:var(--c-on)}
+.sg.done::before{top:-80%;border-radius:40%}.sg.done{color:var(--sg-on)}
 .c-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin:clamp(44px,5vw,72px) 0 0;font:500 12px/1.4 "Inter Tight","Heebo",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--c-dim)}
 .c-meta .dot{width:8px;height:8px;border-radius:50%;background:#7FD07A;box-shadow:0 0 0 0 rgba(127,208,122,.5);animation:cpulse 2.4s ease-out infinite}
 @keyframes cpulse{70%{box-shadow:0 0 0 8px rgba(127,208,122,0)}100%{box-shadow:0 0 0 0 rgba(127,208,122,0)}}
@@ -440,12 +443,13 @@ p{margin:0}
   .c-show{font-size:17px}
   .contact .c-big{font-size:clamp(44px,13.4vw,64px);line-height:.9}
   .c-sub{font-size:16px;margin:26px 0 24px}
-  .seg{flex-direction:column;width:100%;border-radius:4px}
+  .seg{flex-direction:column;width:100%}
   .sg{width:100%;min-width:0;height:66px;justify-content:start;place-items:center start;padding:0 20px}
-  .sg+.sg{border-inline-start:0;border-top:1px solid var(--c-line)}
+  .sg+.sg{border-inline-start:0;border-top:1px solid var(--sg-line)}
   .sg-s{opacity:.6;transform:translateY(13px);font-size:12px;letter-spacing:.03em;font-weight:500}
+  .sg{font-size:15px}
   .sg-t{transform:translateY(-7px)}
-  .sg:active::before{transform:none}.sg:active{color:var(--c-on)}
+  .sg:active::before{top:-80%;border-radius:40%}.sg:active{color:var(--sg-on)}
   .c-meta{font-size:11px;letter-spacing:.16em;margin-top:40px}
 }
 /* Hebrew letters are not spaced out */
