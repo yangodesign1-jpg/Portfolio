@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Journey Demo</title>
+<style>
+:root{--paper:#F4F3F1;--ink:#1E1C1A;--soft:#6b6762;--rule:rgba(30,28,26,.18)}
+@media (prefers-color-scheme:dark){:root{--paper:#171513;--ink:#F1EFEC;--soft:#a39e98;--rule:rgba(241,239,236,.2)}}
+*{box-sizing:border-box;margin:0}
+body{background:var(--paper);color:var(--ink);font-family:'Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.intro,.outro{min-height:70svh;display:grid;place-content:center;text-align:center;padding:24px;gap:14px}
+.intro h1{font-size:clamp(34px,6vw,84px);font-weight:600;letter-spacing:-.03em}
+.intro p,.outro p{color:var(--soft);font-size:clamp(15px,1.4vw,19px)}
+.intro small{color:var(--soft);font-size:13px}
+/* pinned sideways section: height = slides * 100vh, inner is sticky */
+.rail{position:relative}
+.stick{position:sticky;top:0;height:100svh;overflow:hidden}
+.track{display:flex;height:100%;will-change:transform}
+.slide{flex:0 0 100vw;height:100%;display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(20px,4vw,64px);align-items:center;padding:clamp(70px,9vh,110px) clamp(20px,5vw,80px) clamp(40px,6vh,70px)}
+.media{height:100%;min-height:0;display:flex;align-items:center;justify-content:center;overflow:visible;border-radius:8px}
+.media img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;box-shadow:0 18px 44px rgba(0,0,0,.18);transform:scale(var(--s,1.25));transition:none;will-change:transform}
+.txt{max-width:420px}
+.txt .n{font-size:13px;color:var(--soft);letter-spacing:.04em;opacity:var(--o1,0);transform:translateY(calc((1 - var(--o1,0))*18px))}
+.txt h2{font-size:clamp(28px,3.4vw,52px);font-weight:600;letter-spacing:-.02em;line-height:1.05;margin:10px 0 14px;opacity:var(--o2,0);transform:translateY(calc((1 - var(--o2,0))*22px))}
+.txt p{color:var(--soft);font-size:clamp(15px,1.3vw,18px);line-height:1.5;opacity:var(--o3,0);transform:translateY(calc((1 - var(--o3,0))*22px))}
+.txt .tag{margin-top:18px;font-size:13px;border-top:1px solid var(--rule);padding-top:12px;opacity:var(--o3,0)}
+.bar{position:fixed;left:0;right:0;top:0;padding:16px clamp(20px,5vw,80px);display:flex;justify-content:space-between;font-weight:600;z-index:5;mix-blend-mode:difference;color:#fff;pointer-events:none}
+/* reading progress */
+.prog{position:fixed;right:clamp(10px,1.6vw,26px);top:50%;transform:translateY(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:10px;font-size:12px;mix-blend-mode:difference;color:#fff;pointer-events:none}
+.prog i{display:block;width:1px;height:120px;background:rgba(255,255,255,.3);position:relative}
+.prog i b{position:absolute;left:0;top:0;width:1px;height:100%;background:#fff;transform-origin:top;transform:scaleY(var(--p,0))}
+/* cursor label */
+.pill{position:fixed;left:0;top:0;z-index:9;pointer-events:none;background:#111;color:#fff;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:500;opacity:0;transform:translate(-50%,-50%) scale(.8);transition:opacity .2s,scale .2s}
+.pill.on{opacity:1}
+@media (max-width:760px){.slide{grid-template-columns:1fr;grid-template-rows:55% auto;align-content:start;gap:16px;padding-top:80px}.txt{max-width:none}.prog{display:none}}
+@media (prefers-reduced-motion:reduce){.stick{position:static;height:auto}.rail{height:auto!important}.track{display:block;transform:none!important}.slide{height:auto;min-height:90svh}.media img{transform:none}.txt *{opacity:1!important;transform:none!important}}
+</style></head><body>
+<div class="bar"><span>INBAL OZ</span><span>Journey demo</span></div>
+<div class="prog" aria-hidden="true"><span id="pct">0%</span><i><b></b></i></div>
+<div class="pill" id="pill">Open</div>
+
+<section class="intro"><small>Rough demo, not final</small><h1>Selected work</h1><p>Scroll down. The work slides sideways, one screen each.</p></section>
+
+<section class="rail" id="rail"><div class="stick"><div class="track" id="track">
+  <article class="slide"><div class="media" data-pill="Open"><img src="demo/a.jpg" alt="Invitation for Yarden and Shahaf"></div>
+    <div class="txt"><div class="n">01 / 04</div><h2>Yarden &amp; Shahaf</h2><p>A hand-painted watercolor wedding invitation, front and back, with portraits of the couple.</p><div class="tag">For couples · Invitation</div></div></article>
+  <article class="slide"><div class="media" data-pill="Open"><img src="demo/b.jpg" alt="Invitation for Koral and Barak"></div>
+    <div class="txt"><div class="n">02 / 04</div><h2>Koral &amp; Barak</h2><p>A quiet invitation with a wax seal, designed around the flowers of the day.</p><div class="tag">For couples · Invitation</div></div></article>
+  <article class="slide"><div class="media" data-pill="Open"><img src="demo/c.jpg" alt="Book cover"></div>
+    <div class="txt"><div class="n">03 / 04</div><h2>Book cover</h2><p>An illustrated cover, drawn to carry the book's mood from the shelf.</p><div class="tag">Studio · Book</div></div></article>
+  <article class="slide"><div class="media" data-pill="Open"><img src="demo/d.jpg" alt="What is home to me exhibition poster"></div>
+    <div class="txt"><div class="n">04 / 04</div><h2>What is home to me</h2><p>An exhibition I curated with two groups of creators, at the Aviv in Shapira festival.</p><div class="tag">Studio · Exhibition</div></div></article>
+</div></div></section>
+
+<section class="outro"><h1 style="font-size:clamp(28px,4vw,56px);font-weight:600;letter-spacing:-.02em">More soon</h1><p>After the last one, the page carries on down.</p></section>
+
+<script>
+(function(){
+  const rail=document.getElementById('rail'), track=document.getElementById('track'), slides=[...track.children], N=slides.length;
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const prog=document.querySelector('.prog'), pct=document.getElementById('pct');
+  const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)), ease=t=>1-Math.pow(1-t,3);
+  function size(){ if(!reduce) rail.style.height=(N*100)+'svh'; }
+  function frame(){
+    const r=rail.getBoundingClientRect(), vh=innerHeight, total=rail.offsetHeight-vh;
+    const p=clamp(-r.top/total,0,1);
+    document.documentElement.style.setProperty('--p',p);
+    prog.style.setProperty('--p',p); pct.textContent=Math.round(p*100)+'%';
+    if(reduce) return;
+    const pos=p*(N-1);
+    track.style.transform='translate3d('+(-pos*100)+'vw,0,0)';
+    slides.forEach((s,i)=>{
+      const near=clamp(1-Math.abs(pos-i),0,1);          // 1 when this slide is centred
+      const t=ease(clamp((near-.2)/.8,0,1));
+      const img=s.querySelector('img'), tx=s.querySelector('.txt');
+      img.style.setProperty('--s',1.22-.22*t);
+      tx.style.setProperty('--o1',clamp((near-.45)/.3,0,1));
+      tx.style.setProperty('--o2',clamp((near-.55)/.3,0,1));
+      tx.style.setProperty('--o3',clamp((near-.65)/.3,0,1));
+    });
+  }
+  size(); addEventListener('resize',()=>{size();frame()},{passive:true});
+  addEventListener('scroll',()=>requestAnimationFrame(frame),{passive:true}); frame();
+  // cursor label (fine pointers only)
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+    const pill=document.getElementById('pill');
+    addEventListener('pointermove',e=>{
+      pill.style.left=e.clientX+'px'; pill.style.top=e.clientY+'px';
+      const m=e.target.closest&&e.target.closest('[data-pill]');
+      pill.classList.toggle('on',!!m); if(m) pill.textContent=m.dataset.pill;
+    },{passive:true});
+  }
+})();
+</script>
+</body></html>
