@@ -5,7 +5,7 @@
 <meta name="description" content="Inbal Oz, graphic designer. Portfolio.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter+Tight:wght@400;500;600&family=Source+Sans+3:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;800&family=Inter+Tight:wght@400;500;600;800&family=Source+Sans+3:wght@700&display=swap">
 <style>
 /* Layout: the name as a monument (dark field, full width) → a drawer of colour folders that stack as you scroll
    → each project opens as a book → about with portrait drop cap → contact in display rows → name again in the footer. */
@@ -382,48 +382,53 @@ p{margin:0}
 .fb-row{display:flex;align-items:center;gap:14px}
 .fb-send{min-height:44px;padding:0 22px;border-radius:999px;background:rgba(255,255,255,.16);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.3);font-weight:500}
 #fb-msg{font-size:var(--s-small);opacity:.85}
-/* ---------- contact ---------- */
-.contact{--sf:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter Tight","Heebo",system-ui,sans-serif;position:relative;overflow:hidden;font-family:var(--sf);color:#0c1a3d;background:#2f6fd0 url(bliss.jpg) center 62%/cover;padding-block:clamp(56px,7vw,104px) clamp(64px,8vw,120px)}
-.contact::before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 20% 30%,#ff7ac8 0,transparent 42%),radial-gradient(circle at 80% 25%,#ffb347 0,transparent 40%),radial-gradient(circle at 60% 85%,#7a6cff 0,transparent 45%),radial-gradient(circle at 15% 85%,#3de0c2 0,transparent 40%);mix-blend-mode:overlay;opacity:1;pointer-events:none;animation:drift 22s ease-in-out infinite alternate}
-.contact::after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.1);pointer-events:none}
-@keyframes drift{0%{transform:translate(-6%,-4%) rotate(0deg) scale(1);filter:hue-rotate(0deg)}50%{transform:translate(5%,4%) rotate(14deg) scale(1.15);filter:hue-rotate(70deg)}100%{transform:translate(-3%,6%) rotate(-10deg) scale(1.05);filter:hue-rotate(160deg)}}
-@media (prefers-reduced-motion:reduce){.contact::before{animation:none}}
-.contact>*{position:relative}
-.contact h2::first-line{font-size:1.55em;line-height:1.05}
-.contact h2{white-space:pre-line;padding-block:0 clamp(32px,4.5vw,56px);max-width:22em;font-size:clamp(26px,3.7vw,50px);font-weight:600;letter-spacing:-.022em;line-height:1.08;}
-/* glass cards stacked on one another, like the Apple tab switcher */
-.cstack{max-width:760px;margin-inline:auto;display:flex;flex-direction:column}
-.cc{position:relative;display:flex;flex-direction:column;justify-content:flex-start;gap:6px;min-height:190px;padding:18px 26px 0;border-radius:28px;color:#0c1a3d;text-decoration:none;background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.2));-webkit-backdrop-filter:blur(22px) saturate(1.5) brightness(1.06);backdrop-filter:blur(22px) saturate(1.5) brightness(1.06);border:.5px solid rgba(255,255,255,.42);box-shadow:inset 0 1.5px 1px rgba(255,255,255,.6),inset 0 -1px 2px rgba(255,255,255,.22),0 20px 44px -14px rgba(0,0,0,.38);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
-.cc+.cc{margin-top:-80px}
-.cc:nth-child(1){z-index:1}.cc:nth-child(2){z-index:2}.cc:nth-child(3){z-index:3}.cc:nth-child(4){z-index:4;min-height:190px}
-.cc:hover{transform:translateY(-8px)}
-.cc .cl{font-size:15px;font-weight:500;color:rgba(12,26,61,.7);letter-spacing:0}
-.cc .cv{display:flex;align-items:center;justify-content:space-between;gap:14px;font-size:clamp(24px,3.8vw,40px);font-weight:600;letter-spacing:-.022em;line-height:1.15;margin-top:2px}
-.cc .cv .t{min-width:0;overflow-wrap:anywhere}
-.cc .cv .t.ltr{direction:ltr;unicode-bidi:isolate}
-.cc .cm{font-size:15px;font-weight:500;color:rgba(12,26,61,.7);white-space:nowrap}
-.copy{font:inherit;font-size:15px;font-weight:500;color:#0c1a3d;min-height:40px;padding-inline:18px;border-radius:999px;background:rgba(255,255,255,.45);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.7);flex:none;cursor:pointer}
-.copy:hover{background:rgba(255,255,255,.7)}
-.go{display:inline-grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;transition:transform .25s var(--ease)}
-.go svg{width:18px;height:18px}
-[dir=rtl] .go svg{transform:scaleX(-1)}
-.cc.hello .cv{margin-top:14px}
-.cc.hello:hover .go{transform:scale(1.08) rotate(-8deg)}
-@media (max-width:640px){.cc{padding:18px 20px 0;border-radius:24px}.contact h2{font-size:18px}.contact h2::first-line{font-size:1.4em}.cc .cv{font-size:24px}#mail{font-size:clamp(16px,5vw,22px);overflow-wrap:normal}.cc+.cc{margin-top:-80px}}
-@media (prefers-reduced-motion:reduce){.cc{transition:none}.cc:hover{transform:none}}
-/* calm background (user, 2026-10-24): the noisy wallpaper and colour blobs are gone; the same quiet sky as the work scene.
-   Light: page colour into a pale sky blue. Dark: the page's dark ground into the night-sky navy. */
-.contact{background:var(--paper)}
-.contact::before,.contact::after{display:none}
-.cc{background:rgba(255,255,255,.62);box-shadow:0 0 0 .5px rgba(12,26,61,.12),0 -6px 24px rgba(12,26,61,.06)}
-.copy{background:rgba(12,26,61,.06);box-shadow:inset 0 0 0 .5px rgba(12,26,61,.14)}
-.copy:hover{background:rgba(12,26,61,.1)}
-:root[data-theme="dark"] .contact{background:var(--paper);color:#F1EFEC}
-:root[data-theme="dark"] .contact h2{color:#F1EFEC}
-:root[data-theme="dark"] .cc{color:#EEF2FA;background:rgba(255,255,255,.07);box-shadow:0 0 0 .5px rgba(255,255,255,.14),0 -6px 24px rgba(0,0,0,.25)}
-:root[data-theme="dark"] .cc .cl,:root[data-theme="dark"] .cc .cm{color:rgba(238,242,250,.66)}
-:root[data-theme="dark"] .copy{color:#EEF2FA;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.18)}
-@media (max-width:640px){.cc{box-shadow:0 0 0 .5px rgba(12,26,61,.12),0 -4px 14px rgba(12,26,61,.06)}:root[data-theme="dark"] .cc{box-shadow:0 0 0 .5px rgba(255,255,255,.14),0 -4px 14px rgba(0,0,0,.25)}}
+/* ---------- contact (2026-11-01): dark band, small label, huge uppercase headline, segmented buttons that fill on hover ---------- */
+.contact{--c-bg:#1B1D17;--c-fg:#E9DFD1;--c-dim:rgba(233,223,209,.62);--c-line:rgba(233,223,209,.22);position:relative;overflow:hidden;background:var(--c-bg);color:var(--c-fg);padding-block:clamp(96px,11vw,170px) clamp(72px,8vw,120px)}
+:root[data-theme="dark"] .contact{background:var(--c-bg);color:var(--c-fg)}
+.ct{max-width:1600px;margin-inline:auto}
+.c-lbl{font:600 13px/1 "Inter Tight","Heebo",sans-serif;letter-spacing:.28em;text-transform:uppercase;margin:0 0 clamp(36px,4vw,60px)}
+.c-show{font:500 clamp(18px,1.6vw,24px)/1.3 "Inter Tight","Heebo",sans-serif;color:var(--c-dim);margin:0 0 14px;letter-spacing:-.01em}
+.contact .c-big{font-family:"Inter Tight","Heebo",sans-serif;font-weight:800;text-transform:uppercase;font-size:clamp(64px,9.4vw,168px);line-height:.88;letter-spacing:-.035em;margin:0;color:var(--c-fg)}
+[lang=he] .contact .c-big,.contact .c-big:lang(he){font-family:"Heebo",sans-serif;letter-spacing:-.02em;line-height:.95}
+.c-sub{font:400 clamp(16px,1.25vw,19px)/1.5 "Inter Tight","Heebo",sans-serif;color:var(--c-dim);max-width:34em;margin:clamp(32px,3.4vw,52px) 0 clamp(28px,2.6vw,40px)}
+/* segmented row: three joined cells; on hover the cell fills from below and a small second line rises in */
+.seg{display:flex;width:max-content;max-width:100%;border:1px solid var(--c-line);border-radius:4px}
+.sg{position:relative;overflow:hidden;isolation:isolate;display:grid;place-items:center;min-width:clamp(150px,13vw,210px);height:64px;padding:0 24px;font:600 13px/1 "Inter Tight","Heebo",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--c-fg);text-decoration:none;background:none;border:0;cursor:pointer;transition:color .35s cubic-bezier(.2,.7,.2,1)}
+.sg+.sg{border-inline-start:1px solid var(--c-line)}
+.sg::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--c-fg);transform:translateY(101%);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.sg-t,.sg-s{grid-area:1/1;transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .3s}
+.sg-s{font-size:11px;letter-spacing:.04em;font-weight:500;opacity:0;transform:translateY(14px);text-transform:none}
+.sg-s.ltr{direction:ltr;unicode-bidi:isolate}
+.sg:focus-visible{outline:2px solid var(--c-fg);outline-offset:3px}
+@media (hover:hover){
+  .sg:hover,.sg:focus-visible{color:var(--c-bg)}
+  .sg:hover::before,.sg:focus-visible::before{transform:none}
+  .sg:hover .sg-t,.sg:focus-visible .sg-t{transform:translateY(-7px)}
+  .sg:hover .sg-s,.sg:focus-visible .sg-s{opacity:.75;transform:translateY(12px)}
+}
+.sg.done::before{transform:none}.sg.done{color:var(--c-bg)}
+.c-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin:clamp(44px,5vw,72px) 0 0;font:500 12px/1.4 "Inter Tight","Heebo",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--c-dim)}
+.c-meta .dot{width:8px;height:8px;border-radius:50%;background:#7FD07A;box-shadow:0 0 0 0 rgba(127,208,122,.5);animation:cpulse 2.4s ease-out infinite}
+@keyframes cpulse{70%{box-shadow:0 0 0 8px rgba(127,208,122,0)}100%{box-shadow:0 0 0 0 rgba(127,208,122,0)}}
+.c-meta .ltr{direction:ltr;unicode-bidi:isolate}
+/* phone: smaller label, headline sized to the screen width, buttons stacked full width with the second line always shown */
+@media (max-width:640px){
+  .contact{padding-block:84px 64px}
+  .c-lbl{font-size:11px;letter-spacing:.24em;margin-bottom:28px}
+  .c-show{font-size:17px}
+  .contact .c-big{font-size:clamp(44px,13.4vw,64px);line-height:.9}
+  .c-sub{font-size:16px;margin:26px 0 24px}
+  .seg{flex-direction:column;width:100%;border-radius:4px}
+  .sg{width:100%;min-width:0;height:66px;justify-content:start;place-items:center start;padding:0 20px}
+  .sg+.sg{border-inline-start:0;border-top:1px solid var(--c-line)}
+  .sg-s{opacity:.6;transform:translateY(13px);font-size:12px;letter-spacing:.03em;font-weight:500}
+  .sg-t{transform:translateY(-7px)}
+  .sg:active::before{transform:none}.sg:active{color:var(--c-bg)}
+  .c-meta{font-size:11px;letter-spacing:.16em;margin-top:40px}
+}
+/* Hebrew letters are not spaced out */
+.c-lbl:lang(he),.sg:lang(he),.c-meta:lang(he){letter-spacing:.02em}.c-lbl:lang(he){font-size:15px}.sg:lang(he){font-size:15px}.c-meta:lang(he){font-size:13px}
+@media (prefers-reduced-motion:reduce){.sg,.sg::before,.sg-t,.sg-s{transition:none}.c-meta .dot{animation:none}}
 
 /* ---------- footer: the name again, inverted ---------- */
 .foot{--field:var(--coal);position:relative;background:var(--field) var(--grain);color:var(--on-coal);min-height:86svh;display:grid;grid-template-rows:auto 1fr auto auto;padding-block:40px calc(20px + env(safe-area-inset-bottom,0px))}
@@ -601,12 +606,17 @@ From the first idea to the real thing.</p>
 </section>
 
 <section class="contact" id="contact" aria-labelledby="contact-h">
-  <h2 class="wrap" id="contact-h" data-t="contactH" data-br>This is a one-woman show. My clients become my partners; together, we build great, great things.</h2>
-  <div class="cstack wrap">
-    <a class="cc hello" href="mailto:oz.editt@gmail.com"><span class="cv"><span class="t" data-t="hello">Hello</span><span class="go" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1 9 9 1M3 1h6v6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span></span></a>
-    <div class="cc"><span class="cl" data-t="lblMail">Email</span><span class="cv"><span class="t ltr" id="mail">oz.editt@gmail.com</span><button class="copy" type="button" id="copy" data-t="copy">Copy</button></span></div>
-    <a class="cc" href="https://instagram.com/" rel="noopener"><span class="cl" data-t="ig">Instagram</span><span class="cv"><span class="t ltr">@inbaloz</span></span></a>
-    <div class="cc"><span class="cl" data-t="lblWhere">Location</span><span class="cv"><span class="t" data-t="where">Israel, and anywhere</span><span class="cm" data-t="tz">GMT+2</span></span></div>
+  <div class="ct wrap">
+    <p class="c-lbl" data-t="cLbl">Contact / Availability</p>
+    <p class="c-show" data-t="cShow">This is a one-woman show.</p>
+    <h2 class="c-big" id="contact-h" data-t="contactH" data-br>Let’s turn ideas into visuals.</h2>
+    <p class="c-sub" data-t="cSub">Tell me what you are making, and we will find how it should look.</p>
+    <div class="seg">
+      <a class="sg" href="mailto:oz.editt@gmail.com"><span class="sg-t" data-t="lblMail">Email</span><span class="sg-s ltr">oz.editt@gmail.com</span></a>
+      <a class="sg" href="https://instagram.com/" target="_blank" rel="noopener"><span class="sg-t" data-t="ig">Instagram</span><span class="sg-s ltr">@inbaloz</span></a>
+      <button class="sg" type="button" id="copy"><span class="sg-t" data-t="copy">Copy email</span><span class="sg-s" data-t="copyS">One click, it’s yours</span></button>
+    </div>
+    <p class="c-meta"><span class="dot" aria-hidden="true"></span><span data-t="avail">Available for new projects</span><span><span data-t="whereShort">Israel</span>, <span class="ltr" id="ctime">GMT+2</span></span></p>
   </div>
 </section>
 
@@ -678,14 +688,14 @@ const T = {
     draft:'גרסת עבודה: הקטגוריות, העבודות והטקסטים כאן הם דוגמאות עד שמיון העבודות יסתיים.',workH:'המגירה',skipScene:'דילוג לתיקיות',workP:'שלוש תיקיות, לפי מי שהעבודה נועדה לו. פותחים תיקייה, בוחרים ספר ומדפדפים.',
     aboutH:'אודות',f1k:'מיקום',f1v:'דיגיטלית, מכל מקום',f2k:'שפות עבודה',f2v:'עברית, English',f3k:'זמינות',f3v:'פתוחה לפרויקטים',portrait:'כאן תבוא תמונה שלך',bioName:'ענבל עוז',
     bio1:'מאיירת, מעצבת ואנימטורית. אני משלבת את הכלים שהעבודה צריכה: מכחול ודיו, תוכנות אדובי ובינה מלאכותית, וגורמת לזה לעבוד איפה שצריך: בדפוס, על קיר, על אריזה או על שלט. אני עובדת עם עסקים, עם זוגות ובציורים שלי.',
-    bio2:'אני עובדת דיגיטלית מכל מקום, עם אנשים ברחבי הארץ ובעולם.',contactH:'זו הופעת יחיד.\nהלקוחות שלי הופכים לשותפים,\nויחד אנחנו בונים דברים גדולים.',hello:'בואו נדבר',lblHello:'להגיד שלום',lblMail:'מייל',lblWhere:'מיקום',copy:'העתקה',copied:'הועתק',ig:'אינסטגרם',where:'ישראל, ובכל מקום',tz:'GMT+2',
+    bio2:'אני עובדת דיגיטלית מכל מקום, עם אנשים ברחבי הארץ ובעולם.',contactH:'בואו נהפוך\nרעיונות\nלתמונות.',cLbl:'יצירת קשר / זמינות',cShow:'זו הופעת יחיד.',cSub:'ספרו לי מה אתם יוצרים, ויחד נמצא איך זה צריך להיראות.',copyS:'בלחיצה אחת, אצלכם',avail:'פנויה לפרויקטים חדשים',whereShort:'ישראל',hello:'בואו נדבר',lblHello:'להגיד שלום',lblMail:'מייל',lblWhere:'מיקום',copy:'העתקת מייל',copied:'הועתק',ig:'אינסטגרם',where:'ישראל, ובכל מקום',tz:'GMT+2',
     footH:'ניווט ופרטים',c1:'באתר',c2:'רשתות',c3:'מייל',c4:'שפה',c4v:'עברית · English',legal:'כל העבודות באתר שייכות למעצבת וללקוחותיה.',close:'סגירה',prev:'הקודם',next:'הבא',
     works:'עבודות',sample:'דוגמה',open:'לפתוח את',imgSoon:'כאן תבוא תמונה מהפרויקט',brief:'הבריף',process:'התהליך',result:'התוצאה',credits:'קרדיטים',client:'לקוח',year:'שנה',navLabel:'ראשי',langBtn:'Switch to English'},
   en:{fbOpen:'Something not working on the site? Please tell me',fbLabel:'What is not working, and where?',fbSend:'Send',fbThanks:'Thank you, got it.',fbErr:'Could not send, please try again.',wedH:'Weddings',wedP:'Invitations and everything around the day, designed for one couple at a time.',wed1:'Save the date',wed2:'The invitation, with special printing options',wed3:'Wedding menus',wed4:'Full design of the hall, made to fit the couple',sA:'Conversation',sAd:'We talk about what it is for, who will see it, and what you already have.',sB:'Idea and sketches',sBd:'A few quick directions on paper, before anything is polished.',sC:'Drawing and design',sCd:'The chosen direction, drawn and built properly.',sD:'Production',sDd:'Files ready for print, screen or wall, and help with the printer if you need it.',sE:'Handover',sEd:'Everything organised, with the sources, so it keeps working after we finish.',nWork:'Work',nAbout:'About',nContact:'Contact',heroLine:'Designer, illustrator, animator.\nFrom the first idea to the real thing.',heroAct:'See my work',heroAct2:'Get in touch',enter:'Click to enter',tapEnter:'Tap the folder to enter',h1Label:'Inbal Oz, graphic designer',
     draft:'Working draft: the categories, projects and text here are examples until the work is sorted.',workH:'The drawer',skipScene:'Skip to the folders',workP:'Three folders, by who the work is for. Open one, pick a book and leaf through it.',
     aboutH:'About',f1k:'Based',f1v:'Digitally, from anywhere',f2k:'Languages',f2v:'Hebrew, English',f3k:'Availability',f3v:'Open to projects',portrait:'Your photo goes here',bioName:'Inbal Oz',
     bio1:'is an illustrator, designer and animator. I mix whatever tools the work needs: a brush or ink, the Adobe apps and AI, and I make it work wherever it is needed: print, a wall, packaging, a billboard. I work with businesses, with couples, and on drawings of my own.',
-    bio2:'I work digitally, from anywhere, with people across Israel and around the world.',contactH:'This is a one-woman show.\nMy clients become my partners\nTogether, we build great, great things.',hello:'Start a conversation',lblHello:'Say hello',lblMail:'Email',lblWhere:'Location',copy:'Copy',copied:'Copied',ig:'Instagram',where:'Israel, and anywhere',tz:'GMT+2',
+    bio2:'I work digitally, from anywhere, with people across Israel and around the world.',contactH:'Let’s turn\nideas into\nvisuals.',cLbl:'Contact / Availability',cShow:'This is a one-woman show.',cSub:'Tell me what you are making, and together we will find how it should look.',copyS:'One click, it’s yours',avail:'Available for new projects',whereShort:'Israel',hello:'Start a conversation',lblHello:'Say hello',lblMail:'Email',lblWhere:'Location',copy:'Copy email',copied:'Copied',ig:'Instagram',where:'Israel, and anywhere',tz:'GMT+2',
     footH:'Navigation and details',c1:'On this site',c2:'Elsewhere',c3:'Email',c4:'Language',c4v:'עברית · English',legal:'All work on this site belongs to the designer and her clients.',close:'Close',prev:'Previous',next:'Next',
     works:'projects',sample:'Example',open:'Open',imgSoon:'A picture from the project goes here',brief:'The brief',process:'The process',result:'The result',credits:'Credits',client:'Client',year:'Year',navLabel:'Main',langBtn:'החלפה לעברית'}
 };
@@ -1059,12 +1069,17 @@ book.addEventListener('touchend', e => {
 
 /* ---------------- copy email ---------------- */
 document.getElementById('copy').addEventListener('click', e => {
-  const b = e.currentTarget, txt = document.getElementById('mail').textContent;
-  const done = () => { b.textContent = T[lang].copied; setTimeout(() => b.textContent = T[lang].copy, 1600); };
-  try {
-    navigator.clipboard.writeText(txt).then(done, () => { getSelection().selectAllChildren(document.getElementById('mail')); });
-  } catch (err) { getSelection().selectAllChildren(document.getElementById('mail')); }
+  const b = e.currentTarget, lab = b.querySelector('.sg-t'), txt = 'oz.editt@gmail.com';
+  const done = () => { lab.textContent = T[lang].copied; b.classList.add('done'); setTimeout(() => { lab.textContent = T[lang].copy; b.classList.remove('done'); }, 1600); };
+  const fail = () => { location.href = 'mailto:' + txt; };
+  try { navigator.clipboard.writeText(txt).then(done, fail); } catch (err) { fail(); }
 });
+/* local time in Israel next to "available", like a studio clock */
+(function(){
+  const el = document.getElementById('ctime'); if (!el) return;
+  const tick = () => { try { el.textContent = new Intl.DateTimeFormat('en-GB', {hour:'2-digit', minute:'2-digit', timeZone:'Asia/Jerusalem'}).format(new Date()); } catch (e) {} };
+  tick(); setInterval(tick, 30000);
+})();
 
 /* ---------------- entrances ---------------- */
 function entrances(){
