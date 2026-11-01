@@ -413,25 +413,29 @@ p{margin:0}
 .contact .c-big{font-family:"Inter Tight","Heebo",sans-serif;font-weight:800;text-transform:uppercase;font-size:clamp(64px,9.4vw,168px);line-height:.88;letter-spacing:-.035em;margin:0;color:var(--c-fg)}
 [lang=he] .contact .c-big,.contact .c-big:lang(he){font-family:"Heebo",sans-serif;letter-spacing:-.02em;line-height:.95}
 .c-sub{font:400 clamp(16px,1.25vw,19px)/1.5 "Inter Tight","Heebo",sans-serif;color:var(--c-dim);max-width:34em;margin:clamp(32px,3.4vw,52px) 0 clamp(28px,2.6vw,40px)}
-/* segmented row, like the video: light cells with thin grey lines and plain black caps; on hover a black ink fill
-   rises from below with a soft curved edge (like liquid), the text turns white, and a small second line appears */
-.contact{--sg-bg:rgba(255,255,255,.78);--sg-line:rgba(12,26,61,.12);--sg-ink:#111;--sg-txt:#111;--sg-on:#fff}
-:root[data-theme="dark"] .contact{--sg-bg:rgba(255,255,255,.06);--sg-line:rgba(238,242,250,.16);--sg-ink:#F4F3F1;--sg-txt:#EEF2FA;--sg-on:#111}
-.seg{display:flex;width:max-content;max-width:100%;background:var(--sg-bg);border:1px solid var(--sg-line);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-.sg{position:relative;overflow:hidden;isolation:isolate;display:grid;place-items:center;min-width:clamp(170px,14vw,230px);height:64px;padding:0 24px;font:500 14px/1 "Inter Tight","Heebo",sans-serif;letter-spacing:.02em;text-transform:uppercase;color:var(--sg-txt);text-decoration:none;background:none;border:0;cursor:pointer;transition:color .3s ease .05s}
+/* segmented row, like the video: light grey cells with thin lines and plain black caps (no extra spacing);
+   on hover a black fill rises from the bottom (slightly rounded top), the label turns light, a dark pill label
+   follows the pointer, and the pointer leaves a short ink stroke behind it */
+.contact{--sg-bg:rgba(246,246,246,.92);--sg-line:#DCDCDC;--sg-ink:#000;--sg-txt:#000;--sg-on:#EDEDED;--ink-trail:#000}
+:root[data-theme="dark"] .contact{--sg-bg:rgba(255,255,255,.06);--sg-line:rgba(238,242,250,.18);--sg-ink:#F4F3F1;--sg-txt:#F4F3F1;--sg-on:#111;--ink-trail:#F4F3F1}
+.seg{display:flex;width:max-content;max-width:100%;background:var(--sg-bg);border:1px solid var(--sg-line)}
+.sg{position:relative;overflow:hidden;isolation:isolate;display:grid;place-items:center;width:clamp(190px,16vw,232px);height:68px;padding:0 20px;font:500 16px/1 "Inter Tight","Heebo",-apple-system,sans-serif;letter-spacing:0;text-transform:uppercase;color:var(--sg-txt);text-decoration:none;background:none;border:0;cursor:pointer;transition:color .2s ease}
 .sg+.sg{border-inline-start:1px solid var(--sg-line)}
-.sg::before{content:"";position:absolute;z-index:-1;left:-30%;width:160%;top:105%;height:260%;border-radius:50%;background:var(--sg-ink);transition:top .55s cubic-bezier(.3,.6,.2,1),border-radius .55s cubic-bezier(.3,.6,.2,1)}
-.sg-t,.sg-s{grid-area:1/1;transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .3s}
-.sg-s{font-size:10px;letter-spacing:.06em;font-weight:500;opacity:0;transform:translateY(16px);text-transform:none}
+.sg::before{content:"";position:absolute;z-index:-1;inset:0 -1px -1px;border-radius:40% 40% 0 0/10px 10px 0 0;background:var(--sg-ink);transform:translateY(102%);transition:transform .5s cubic-bezier(.65,0,.35,1),border-radius .5s}
+.sg-t,.sg-s{grid-area:1/1}
+.sg-s{display:none;text-transform:none}
 .sg-s.ltr{direction:ltr;unicode-bidi:isolate}
 .sg:focus-visible{outline:2px solid var(--sg-txt);outline-offset:3px}
 @media (hover:hover){
-  .sg:hover,.sg:focus-visible{color:var(--sg-on)}
-  .sg:hover::before,.sg:focus-visible::before{top:-80%;border-radius:40%}
-  .sg:hover .sg-t,.sg:focus-visible .sg-t{transform:translateY(-6px)}
-  .sg:hover .sg-s,.sg:focus-visible .sg-s{opacity:.7;transform:translateY(13px)}
+  .sg:hover,.sg:focus-visible{color:var(--sg-on);transition-delay:.18s}
+  .sg:hover::before,.sg:focus-visible::before{transform:none;border-radius:0}
 }
-.sg.done::before{top:-80%;border-radius:40%}.sg.done{color:var(--sg-on)}
+.sg.done::before{transform:none;border-radius:0}.sg.done{color:var(--sg-on)}
+/* the dark pill that follows the pointer over a button, and the ink stroke canvas */
+.c-pill{position:fixed;left:0;top:0;z-index:45;pointer-events:none;padding:8px 14px;border-radius:999px;background:#2B2B2B;color:#F2F2F2;font:500 11px/1 "Inter Tight","Heebo",sans-serif;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;opacity:0;transform:translate(-9999px,0);transition:opacity .18s}
+.c-pill.on{opacity:1}
+.c-ink{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.contact .ct{position:relative;z-index:1}
 .c-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin:clamp(44px,5vw,72px) 0 0;font:500 12px/1.4 "Inter Tight","Heebo",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--c-dim)}
 .c-meta .dot{width:8px;height:8px;border-radius:50%;background:#7FD07A;box-shadow:0 0 0 0 rgba(127,208,122,.5);animation:cpulse 2.4s ease-out infinite}
 @keyframes cpulse{70%{box-shadow:0 0 0 8px rgba(127,208,122,0)}100%{box-shadow:0 0 0 0 rgba(127,208,122,0)}}
@@ -444,16 +448,16 @@ p{margin:0}
   .contact .c-big{font-size:clamp(44px,13.4vw,64px);line-height:.9}
   .c-sub{font-size:16px;margin:26px 0 24px}
   .seg{flex-direction:column;width:100%}
-  .sg{width:100%;min-width:0;height:66px;justify-content:start;place-items:center start;padding:0 20px}
+  .sg{width:100%;min-width:0;height:68px;justify-content:start;place-items:center start;padding:0 20px}
   .sg+.sg{border-inline-start:0;border-top:1px solid var(--sg-line)}
-  .sg-s{opacity:.6;transform:translateY(13px);font-size:12px;letter-spacing:.03em;font-weight:500}
-  .sg{font-size:15px}
+  .sg-s{display:block;opacity:.6;transform:translateY(13px);font-size:12px;letter-spacing:.02em;font-weight:500}
+  .sg{font-size:16px}
   .sg-t{transform:translateY(-7px)}
   .sg:active::before{top:-80%;border-radius:40%}.sg:active{color:var(--sg-on)}
   .c-meta{font-size:11px;letter-spacing:.16em;margin-top:40px}
 }
 /* Hebrew letters are not spaced out */
-.c-lbl:lang(he),.sg:lang(he),.c-meta:lang(he){letter-spacing:.02em}.c-lbl:lang(he){font-size:15px}.sg:lang(he){font-size:15px}.c-meta:lang(he){font-size:13px}
+.c-lbl:lang(he),.sg:lang(he),.c-meta:lang(he){letter-spacing:.02em}.c-lbl:lang(he){font-size:15px}.sg:lang(he){font-size:16px;letter-spacing:0}.c-meta:lang(he){font-size:13px}
 @media (prefers-reduced-motion:reduce){.sg,.sg::before,.sg-t,.sg-s{transition:none}.c-meta .dot{animation:none}}
 
 /* ---------- footer: the name again, inverted ---------- */
@@ -632,6 +636,8 @@ From the first idea to the real thing.</p>
 </section>
 
 <section class="contact" id="contact" aria-labelledby="contact-h">
+  <canvas class="c-ink" id="c-ink" aria-hidden="true"></canvas>
+  <span class="c-pill" id="c-pill" aria-hidden="true"></span>
   <div class="ct wrap">
     <p class="c-lbl" data-t="cLbl">Contact / Availability</p>
     <h2 class="c-big" id="contact-h" data-t="contactH" data-br>Let’s turn ideas into visuals.</h2>
@@ -1103,6 +1109,36 @@ document.getElementById('copy').addEventListener('click', e => {
   const el = document.getElementById('ctime'); if (!el) return;
   const tick = () => { try { el.textContent = new Intl.DateTimeFormat('en-GB', {hour:'2-digit', minute:'2-digit', timeZone:'Asia/Jerusalem'}).format(new Date()); } catch (e) {} };
   tick(); setInterval(tick, 30000);
+})();
+
+/* contact buttons: a dark pill label follows the pointer, and the pointer leaves a short ink stroke (desktop only) */
+(function(){
+  const sec = document.getElementById('contact'), cv = document.getElementById('c-ink'), pill = document.getElementById('c-pill');
+  if (!sec || !cv || !matchMedia('(hover:hover) and (pointer:fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const ctx = cv.getContext('2d'); let pts = [], raf = 0, dpr = 1;
+  const size = () => { dpr = Math.min(2, devicePixelRatio || 1); cv.width = sec.clientWidth * dpr; cv.height = sec.clientHeight * dpr; };
+  size(); addEventListener('resize', size); if ('ResizeObserver' in window) new ResizeObserver(size).observe(sec);
+  const draw = () => {
+    if (cv.height !== Math.round(sec.clientHeight * dpr)) size();
+    const now = performance.now(); pts = pts.filter(p => now - p.t < 520);
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    const col = getComputedStyle(sec).getPropertyValue('--ink-trail').trim() || '#000';
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = col;
+    for (let k = 1; k < pts.length; k++) {
+      const a = pts[k-1], b = pts[k], life = 1 - (now - b.t) / 520;
+      ctx.globalAlpha = Math.min(1, Math.max(0, life * 1.6)); ctx.lineWidth = (1.5 + 8 * life) * dpr;
+      ctx.beginPath(); ctx.moveTo(a.x * dpr, a.y * dpr); ctx.lineTo(b.x * dpr, b.y * dpr); ctx.stroke();
+    }
+    raf = pts.length ? requestAnimationFrame(draw) : 0;
+  };
+  sec.addEventListener('pointermove', e => {
+    const r = sec.getBoundingClientRect(); pts.push({x: e.clientX - r.left, y: e.clientY - r.top, t: performance.now()});
+    if (!raf) raf = requestAnimationFrame(draw);
+    const b = e.target.closest && e.target.closest('.sg');
+    if (b) { const s2 = b.querySelector('.sg-s'); pill.textContent = s2 ? s2.textContent : ''; pill.classList.add('on'); pill.style.transform = `translate(${e.clientX + 18}px,${e.clientY + 14}px)`; }
+    else pill.classList.remove('on');
+  });
+  sec.addEventListener('pointerleave', () => pill.classList.remove('on'));
 })();
 
 /* ---------------- entrances ---------------- */
