@@ -408,9 +408,6 @@ p{margin:0}
 .rv.in{opacity:1;transform:none}
 .ab-measure .rv{transform:none!important;transition:none!important}
 .about-me{position:relative;z-index:2}
-.eye-fly{position:fixed;left:0;top:0;z-index:40;pointer-events:none;display:none;will-change:transform}
-.eye-fly svg{display:block;width:100%;height:100%;overflow:visible}
-.ab-big .ch.o-eye{visibility:hidden}
 /* ---------- weddings ---------- */
 .wed{padding-block:clamp(80px,10vw,150px) 0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}
 .wed h2{grid-column:1/-1;font-size:var(--s-h2);letter-spacing:-.02em}
@@ -1692,13 +1689,6 @@ runIntro();
     const r = port.getBoundingClientRect(), rt = top.getBoundingClientRect();
     const lidTop = (r.top + r.height / 2 - capH / 2) - rt.top;   // centre of the (tilted) iPad, minus half the letter height
     big.style.marginTop = (lidTop - capTopInBox) + 'px';
-    // where the O sits (page coordinates), for the hero eye that flies down to become it
-    const o = [...big.querySelectorAll('.ch')].find(c => c.textContent.toUpperCase() === 'O');
-    if (o) {
-      const orr = o.getBoundingClientRect(), br = big.getBoundingClientRect(), xOff = orr.left + orr.width / 2 - br.left, yOff = rt.top + lidTop + capH / 2 - br.top;
-      window.aboutO = {el: o, d: capH * 1.04, get x(){ return big.getBoundingClientRect().left + xOff + scrollX; }, get y(){ return big.getBoundingClientRect().top + yOff + scrollY; }};
-    } else window.aboutO = null;
-    window.dispatchEvent(new Event('aboutfit'));
     return {capTop: rt.top + lidTop, capH};
   }
   const he = () => document.documentElement.dir === 'rtl';
@@ -1747,62 +1737,6 @@ runIntro();
   const groups = [[port], [bio.querySelector('.about-me')], [...bio.querySelectorAll('p')], [...document.querySelectorAll('#about .facts > div')], [...document.querySelectorAll('#about .steps li')]];
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.15, rootMargin:'0px 0px -6% 0px'});
   groups.forEach(g => g.forEach((el, i) => { if (!el) return; el.classList.add('rv'); el.style.setProperty('--d', (i * 110) + 'ms'); io.observe(el); }));
-})();
-
-/* the hero eye (the O of OZ) comes down with you as you scroll and lands as the O of ABOUT (English; desktop and phone) */
-(function(){
-  const heroEye = document.querySelector('#h1 .eye'); if (!heroEye) return;
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const fly = document.createElement('div'); fly.className = 'eye-fly'; fly.setAttribute('aria-hidden', 'true');
-  const svg = heroEye.cloneNode(true); svg.removeAttribute('id'); svg.classList.remove('ch', 'asleep', 'waking');
-  fly.appendChild(svg); document.body.appendChild(fly);
-  if (typeof eyes !== 'undefined' && Array.isArray(eyes)) eyes.push(svg);   // it blinks and looks around like the others
-  const paint = () => ['.ring', '.white', '.lid-u', '.lid-l', '.rim', '.glint'].forEach(q => {
-    const a = heroEye.querySelector(q), b = svg.querySelector(q); if (!a || !b) return;
-    const cs = getComputedStyle(a); b.style.fill = cs.fill; b.style.stroke = cs.stroke; b.style.strokeWidth = cs.strokeWidth;
-  });
-  new MutationObserver(() => setTimeout(paint, 50)).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
-  let start = null, on = false, raf = 0;
-  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  function measureStart(){
-    // the hero eye's place and size with the page at the very top
-    const r = heroEye.getBoundingClientRect();
-    start = {x: r.left + r.width / 2 + scrollX, y: r.top + r.height / 2 + scrollY, d: r.width};
-  }
-  function frame(){
-    raf = 0;
-    const O = window.aboutO, rtl = document.documentElement.dir === 'rtl';
-    if (!start || !O || rtl || document.documentElement.classList.contains('lay-on')) { show(false); return; }
-    const y = scrollY;
-    if (y <= 2) { show(false); return; }
-    const L = Math.max(1, O.y - innerHeight * .5);         // scroll where the O sits mid-screen
-    const p = Math.min(1, y / L), e = ease(p);
-    let cx, cy, d;
-    const Ox = O.x - scrollX, Oy = O.y;
-    if (p < 1) {
-      // from where the hero eye is right now (it scrolls away with the name) to where the O will be once we land
-      const hr = heroEye.getBoundingClientRect();
-      const sx = hr.left + hr.width / 2, sy = Math.max(hr.top + hr.height / 2, innerHeight * .3);   // it rides up with the name, then stays on screen
-      const ex = Ox, ey = Oy - L;
-      cx = sx + (ex - sx) * e; cy = sy + (ey - sy) * e + Math.sin(p * Math.PI) * innerHeight * .06;
-      d = hr.width + (O.d - hr.width) * e;
-    } else { cx = Ox; cy = Oy - y; d = O.d; }   // landed: it travels with the word
-    fly.style.width = fly.style.height = d + 'px';
-    fly.style.transform = `translate3d(${cx - d / 2}px,${cy - d / 2}px,0)`;
-    show(true, p >= 1);
-  }
-  function show(v, landed){
-    if (v !== on) { on = v; fly.style.display = v ? 'block' : 'none'; heroEye.style.visibility = v ? 'hidden' : ''; if (v) paint(); }
-    const O = window.aboutO; if (O && O.el) O.el.classList.toggle('o-eye', !!v || (scrollY > 2));
-  }
-  const go = () => { if (!raf) raf = requestAnimationFrame(frame); };
-  addEventListener('scroll', go, {passive:true});
-  addEventListener('resize', () => { measureStart(); go(); });
-  addEventListener('aboutfit', go);
-  // measure once the name has settled at the top
-  const init = () => { measureStart(); go(); };
-  addEventListener('load', () => setTimeout(init, 2400));
-  setTimeout(init, 2600);
 })();
 </script>
 
