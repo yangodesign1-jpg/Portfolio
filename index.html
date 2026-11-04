@@ -219,6 +219,21 @@ p{margin:0}
 .monitor__frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
 .monitor__display{position:absolute;left:13.8%;top:16.2%;width:72.4%;height:53%;overflow:hidden;border-radius:5%/7%;z-index:1;background:#3E7FD8 url(scene/wallpaper.webp) 50% 50%/100% auto;container-type:inline-size}
 .desk{position:absolute;inset:0;display:grid;place-items:center;padding:6cqw 4cqw}
+/* a dock along the bottom of the computer's screen, her own Mac dock; frosted glass so the wallpaper shows through */
+.mdock{position:absolute;z-index:2;left:50%;bottom:1.2cqw;transform:translateX(-50%);display:flex;align-items:flex-end;gap:.28cqw;padding:.45cqw .55cqw;border-radius:1.3cqw;background:rgba(255,255,255,.2);-webkit-backdrop-filter:blur(12px) saturate(1.7);backdrop-filter:blur(12px) saturate(1.7);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.45),0 .8cqw 2.4cqw rgba(0,25,70,.22)}
+:root[data-theme="dark"] .mdock{background:rgba(18,22,40,.28);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.18),0 .8cqw 2.4cqw rgba(0,0,0,.35)}
+.mdock i{display:block;flex:none;width:2.2cqw;aspect-ratio:1}
+.mdock img{display:block;width:100%;height:100%}
+.mdock .sep{flex:none;align-self:stretch;width:1px;margin-inline:.25cqw;background:rgba(255,255,255,.45)}
+.mdock i{position:relative}
+.mdock i.on::before{content:"";position:absolute;left:50%;bottom:-.34cqw;width:.3cqw;height:.3cqw;margin-left:-.15cqw;border-radius:50%;background:rgba(255,255,255,.8)}
+/* hovering an app shows its name in a small glass label above it, like on her Mac (no magnifying) */
+.mdock i::after{content:attr(data-n);position:absolute;left:50%;bottom:calc(100% + 1.1cqw);transform:translateX(-50%);white-space:nowrap;padding:.35cqw .9cqw;border-radius:.9cqw;font:500 max(10px,1.15cqw)/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter Tight",sans-serif;color:#fff;background:rgba(255,255,255,.18);-webkit-backdrop-filter:blur(10px) saturate(1.6);backdrop-filter:blur(10px) saturate(1.6);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.45),0 .3cqw 1cqw rgba(0,0,0,.18);text-shadow:0 1px 2px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .12s}
+@media (hover:hover){.mdock i:hover::after{opacity:1}}
+/* phone: the whole dock does not fit, so it keeps bigger icons and slides sideways under a finger */
+/* phone: all 36 apps in one row like her Mac, just smaller, and the dock sits a little lower */
+@media (max-width:767px){.mdock{left:2cqw;right:2cqw;transform:none;justify-content:space-between;gap:0;bottom:.8cqw;padding:.6cqw .7cqw .9cqw;border-radius:1.4cqw}.mdock i{width:2.42cqw}.mdock .sep{margin-inline:.15cqw}.mdock i.on::before{width:.32cqw;height:.32cqw;margin-left:-.16cqw;bottom:-.55cqw}}
+
 .js-scene .scene{height:320svh}
 .js-scene .desk-at{top:calc(100% - 100svh)}
 .js-scene .stage{position:sticky;top:0}
@@ -334,8 +349,11 @@ p{margin:0}
 .bio{grid-column:3/13;font-size:var(--s-stmt);line-height:1.22;letter-spacing:-.012em}
 .bio p+p{margin-top:1.2em;color:var(--ink-soft)}
 .portrait{float:inline-start;width:3.66em;height:3.66em;margin-inline-end:.5em;margin-top:.12em;position:relative}
-.portrait .cover{padding:8px;padding-top:30px}
-.portrait .cover .cm{font-size:13px;line-height:1.15}
+/* the portrait flips from her photo into her drawings of it, like a flipbook (frames in about/frames, faces lined up) */
+.portrait{width:5.2em;height:5.2em;margin-inline-end:.55em}
+.pf{position:absolute;inset:0;overflow:hidden;background:#fff;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 8px 22px -10px rgba(0,0,0,.35)}
+.pf img{display:block;width:100%;height:100%;object-fit:cover}
+@media (max-width:640px){.portrait{width:5.6em;height:5.6em;margin-inline-end:.45em;margin-top:.2em}}
 .clip{position:absolute;top:-14px;inset-inline-end:12px;width:18px;height:46px;z-index:2}
 @media (max-width:820px){.facts{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;order:2}.bio{grid-column:1/-1}}
 
@@ -587,7 +605,7 @@ From the first idea to the real thing.</p>
       <div class="sc-clouds" aria-hidden="true"><img class="sc-c sc-c1" src="scene/cloud-1.webp" alt=""><img class="sc-c sc-c2" src="scene/cloud-2.webp" alt=""></div>
       <picture class="sc-land" aria-hidden="true"><source media="(max-width:767px)" srcset="scene/terrain-mobile.webp"><img src="scene/terrain-desktop.webp" alt=""></picture>
       <div class="monitor" id="monitor">
-        <div class="monitor__display"><div class="desk" id="desk"><div class="folders" id="folders"></div></div></div>
+        <div class="monitor__display"><div class="desk" id="desk"><div class="folders" id="folders"></div></div><div class="mdock" aria-label="My dock" role="list"><i class="on" role="listitem" aria-label="Finder" data-n="Finder"><img src="icons/dock/00-finder.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="System Settings" data-n="System Settings"><img src="icons/dock/01-settings.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Safari" data-n="Safari"><img src="icons/dock/02-safari.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Launchpad" data-n="Launchpad"><img src="icons/dock/03-launchpad.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Photos" data-n="Photos"><img src="icons/dock/04-photos.png" alt="" width="66" height="66" loading="lazy"></i><i class="on" role="listitem" aria-label="Chrome" data-n="Chrome"><img src="icons/dock/05-chrome.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Notes" data-n="Notes"><img src="icons/dock/06-notes.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Freeform" data-n="Freeform"><img src="icons/dock/07-freeform.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Calendar" data-n="Calendar"><img src="icons/dock/08-calendar.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Podcasts" data-n="Podcasts"><img src="icons/dock/09-podcasts.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Keynote" data-n="Keynote"><img src="icons/dock/10-keynote.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Adobe XD" data-n="Adobe XD"><img src="icons/dock/11-xd.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Lightroom" data-n="Lightroom"><img src="icons/dock/12-lr.png" alt="" width="66" height="66" loading="lazy"></i><i class="on" role="listitem" aria-label="Photoshop (Beta)" data-n="Photoshop (Beta)"><img src="icons/dock/13-ps-beta.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Photoshop" data-n="Photoshop"><img src="icons/dock/14-ps.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="After Effects" data-n="After Effects"><img src="icons/dock/15-ae.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Premiere Pro" data-n="Premiere Pro"><img src="icons/dock/16-pr.png" alt="" width="66" height="66" loading="lazy"></i><i class="on" role="listitem" aria-label="Illustrator" data-n="Illustrator"><img src="icons/dock/17-ai.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="InDesign" data-n="InDesign"><img src="icons/dock/18-id.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Media Encoder" data-n="Media Encoder"><img src="icons/dock/19-me.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Creative Cloud" data-n="Creative Cloud"><img src="icons/dock/20-cc.png" alt="" width="66" height="66" loading="lazy"></i><i class="on" role="listitem" aria-label="Pages" data-n="Pages"><img src="icons/dock/21-pages.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="App Store" data-n="App Store"><img src="icons/dock/22-appstore.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Zoom" data-n="Zoom"><img src="icons/dock/23-zoom.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="iPhone Mirroring" data-n="iPhone Mirroring"><img src="icons/dock/24-mirroring.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="TextEdit" data-n="TextEdit"><img src="icons/dock/25-textedit.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Telegram" data-n="Telegram"><img src="icons/dock/26-telegram.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="CapCut" data-n="CapCut"><img src="icons/dock/27-capcut.png" alt="" width="66" height="66" loading="lazy"></i><i class="on" role="listitem" aria-label="Claude" data-n="Claude"><img src="icons/dock/28-claude.png" alt="" width="66" height="66" loading="lazy"></i><i class="on" role="listitem" aria-label="WhatsApp" data-n="WhatsApp"><img src="icons/dock/29-whatsapp.png" alt="" width="66" height="66" loading="lazy"></i><i class="on" role="listitem" aria-label="ChatGPT" data-n="ChatGPT"><img src="icons/dock/30-chatgpt.png" alt="" width="66" height="66" loading="lazy"></i><b class="sep" aria-hidden="true"></b><i class="on" role="listitem" aria-label="Acrobat" data-n="Acrobat"><img src="icons/dock/31-acrobat.png" alt="" width="66" height="66" loading="lazy"></i><i class="on" role="listitem" aria-label="Music" data-n="Music"><img src="icons/dock/32-music.png" alt="" width="66" height="66" loading="lazy"></i><i class="on" role="listitem" aria-label="Preview" data-n="Preview"><img src="icons/dock/33-preview.png" alt="" width="66" height="66" loading="lazy"></i><b class="sep" aria-hidden="true"></b><i role="listitem" aria-label="Downloads" data-n="Downloads"><img src="icons/dock/34-downloads.png" alt="" width="66" height="66" loading="lazy"></i><i role="listitem" aria-label="Trash" data-n="Trash"><img src="icons/dock/35-trash.png" alt="" width="66" height="66" loading="lazy"></i></div></div>
         <img class="monitor__frame" src="scene/monitor.webp" alt="">
       </div>
       <picture class="sc-front" aria-hidden="true"><source media="(max-width:767px)" srcset="scene/grass-front-mobile.webp"><img src="scene/grass-front.webp" alt=""></picture>
@@ -623,7 +641,7 @@ From the first idea to the real thing.</p>
     <div><b data-t="f3k">Availability</b><span data-t="f3v">Open to projects</span></div>
   </div>
   <div class="bio">
-    <p><span class="portrait"><svg class="clip" viewBox="0 0 18 46" aria-hidden="true"><path d="M5 40V9a4 4 0 0 1 8 0v27a2.5 2.5 0 0 1-5 0V12" fill="none" stroke="#8C8780" stroke-width="2" stroke-linecap="round"/></svg><span class="cover" style="--c:var(--f2)"><span class="cm" data-t="portrait">Your photo goes here</span><span class="big">IO</span></span></span><strong style="font-weight:500" data-t="bioName">Inbal Oz</strong> <span data-t="bio1">is a graphic designer working on the line between paper and screen. I build identities, packaging and invitations you want to hold, and I draw when words are not enough.</span></p>
+    <p><span class="portrait"><span class="pf"><img id="pf-img" src="about/frames/f00.webp" alt="" width="480" height="480" decoding="async"></span></span><strong style="font-weight:500" data-t="bioName">Inbal Oz</strong> <span data-t="bio1">is a graphic designer working on the line between paper and screen. I build identities, packaging and invitations you want to hold, and I draw when words are not enough.</span></p>
     <p data-t="bio2">This text is a draft. We will write it together, in your words.</p>
   </div>
   <ol class="steps">
@@ -1238,6 +1256,28 @@ if (!reduce) {
 }
 
 /* 2. (film grain removed, user 2026-10-24) */
+
+/* about portrait: flips through the self-portrait frames at a set pace.
+   PF_FIRST = how long the first frame (her photo) stays, PF_STEP = each other frame, in ms.
+   Runs only while on screen, pauses under the mouse, and stays still for reduced motion. */
+(() => {
+  const img = document.getElementById('pf-img');
+  if (!img) return;
+  const PF_FIRST = 1500, PF_STEP = matchMedia('(max-width:640px)').matches ? 650 : 600;
+  const N = 14, src = i => `about/frames/f${String(i).padStart(2, '0')}.webp`;
+  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  let i = 0, t = 0, seen = false, hover = false, loaded = false;
+  const load = () => { if (loaded) return; loaded = true; for (let k = 1; k < N; k++) { const im = new Image(); im.src = src(k); } };
+  const step = () => {
+    clearTimeout(t);
+    if (!seen || hover) return;
+    t = setTimeout(() => { i = (i + 1) % N; img.src = src(i); step(); }, i === 0 ? PF_FIRST : PF_STEP);
+  };
+  new IntersectionObserver(([e]) => { seen = e.isIntersecting; if (seen) load(); step(); }, {rootMargin:'200px 0px'}).observe(img);
+  const box = img.closest('.portrait');
+  box.addEventListener('mouseenter', () => { hover = true; clearTimeout(t); });
+  box.addEventListener('mouseleave', () => { hover = false; step(); });
+})();
 
 /* 1. intro: a closed folder; click (or Enter) to open it and the eye opens */
 
