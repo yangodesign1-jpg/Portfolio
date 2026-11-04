@@ -212,7 +212,7 @@ p{margin:0}
 .sc-land img{width:100%;height:100%;object-fit:cover;object-position:50% 100%}
 @media (max-width:767px){.sc-land{top:14%}} /* phone: the field starts lower, so there is room for sky and clouds */
 .sc-front{position:absolute;left:0;right:0;bottom:0;height:20svh;transform-origin:50% 100%;transform:scale(1.1);pointer-events:none;z-index:3}
-.sc-front img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 100%;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 38%);mask-image:linear-gradient(180deg,transparent 0,#000 38%)}
+.sc-front img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 100%;-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.35) 0,#000 9%);mask-image:linear-gradient(180deg,rgba(0,0,0,.35) 0,#000 9%)}
 :root[data-theme="dark"] .sc-front img{filter:brightness(.46) saturate(.75) hue-rotate(10deg)}
 @media (max-width:767px){.sc-front{height:17svh;transform:scale(1.1)}}
 .monitor{position:absolute;left:calc(50% - var(--M) / 2);top:calc(64px + (100% - 64px - var(--M)) / 2);width:var(--M);aspect-ratio:1;transform-origin:50% 42.7%}
