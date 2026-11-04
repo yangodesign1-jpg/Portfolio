@@ -334,7 +334,7 @@ p{margin:0}
 .bio{grid-column:3/13;font-size:var(--s-stmt);line-height:1.22;letter-spacing:-.012em}
 .bio p+p{margin-top:1.2em;color:var(--ink-soft)}
 .portrait{float:inline-start;width:3.66em;height:3.66em;margin-inline-end:.5em;margin-top:.12em;position:relative}
-/* the portrait flips through her self-portrait drawings like a flipbook (frames in about/frames) */
+/* the portrait flips from her photo into her drawings of it, like a flipbook (frames in about/frames, faces lined up) */
 .portrait{width:5.2em;height:5.2em;margin-inline-end:.55em}
 .pf{position:absolute;inset:0;overflow:hidden;background:#fff;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 8px 22px -10px rgba(0,0,0,.35);transform:rotate(-1.5deg)}
 .pf img{display:block;width:100%;height:100%;object-fit:cover}
@@ -1243,13 +1243,13 @@ if (!reduce) {
 /* 2. (film grain removed, user 2026-10-24) */
 
 /* about portrait: flips through the self-portrait frames at a set pace.
-   PF_FIRST = how long the first (halftone) portrait stays, PF_STEP = each other frame, in ms.
+   PF_FIRST = how long the first frame (her photo) stays, PF_STEP = each other frame, in ms.
    Runs only while on screen, pauses under the mouse, and stays still for reduced motion. */
 (() => {
   const img = document.getElementById('pf-img');
   if (!img) return;
-  const PF_FIRST = 1800, PF_STEP = matchMedia('(max-width:640px)').matches ? 520 : 460;
-  const N = 19, src = i => `about/frames/f${String(i).padStart(2, '0')}.webp`;
+  const PF_FIRST = 1500, PF_STEP = matchMedia('(max-width:640px)').matches ? 650 : 600;
+  const N = 11, src = i => `about/frames/f${String(i).padStart(2, '0')}.webp`;
   if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
   let i = 0, t = 0, seen = false, hover = false, loaded = false;
   const load = () => { if (loaded) return; loaded = true; for (let k = 1; k < N; k++) { const im = new Image(); im.src = src(k); } };
