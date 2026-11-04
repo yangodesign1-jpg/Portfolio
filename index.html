@@ -238,7 +238,6 @@ p{margin:0}
 .js-scene .desk-at{top:calc(100% - 100svh)}
 .js-scene .stage{position:sticky;top:0}
 @media (max-width:767px){.js-scene .scene{height:260svh}}
-.js-scene.scene-open .scene{height:100svh}.js-scene.scene-open .desk-at{top:0}
 /* the folders on the screen: real buttons, a yellow folder with its name under it; sizes follow the screen (cqw) */
 .folders{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1cqw;width:100%;max-width:62cqw}
 .mfold{display:flex;flex-direction:column;align-items:center;gap:.8cqw;min-height:44px;padding:1.4cqw .8cqw;border-radius:1.6cqw;text-align:center;color:#fff;transition:background .2s}
@@ -1227,7 +1226,7 @@ function sceneHorizon(){
   stage.style.setProperty('--hz', Math.round(top + h - ih * k * (1 - hz)) + 'px');
 }
 sceneHorizon(); addEventListener('resize', sceneHorizon);
-let sc = null, sceneRaf = 0, deskLive = null, sceneOpen = false, sceneShort = false;
+let sc = null, sceneRaf = 0, deskLive = null;
 const clamp01 = v => v < 0 ? 0 : v > 1 ? 1 : v;
 function sceneSize(){
   mon.style.transform = '';
@@ -1238,22 +1237,7 @@ function sceneSize(){
 }
 function sceneFrame(){
   sceneRaf = 0; if (!sc) return;
-  const r = scene.getBoundingClientRect();
-  let p = clamp01(-r.top / (r.height - sc.H));
-  // once the computer has opened, it stays open: scrolling back up does not zoom it out again (user 2026-11-04)
-  if (p >= .85) sceneOpen = true;
-  if (sceneOpen) {
-    p = 1;
-    // when the visitor has scrolled past it, drop the long scroll runway so going back up is just the open computer
-    if (!sceneShort && r.bottom <= 0) {
-      const root = document.documentElement, before = scene.offsetHeight, y = scrollY;
-      root.style.overflowAnchor = 'none'; // we keep the view in place ourselves (browsers differ in doing it for us)
-      root.classList.add('scene-open');
-      scrollTo({top:y + scene.offsetHeight - before, behavior:'instant'});
-      requestAnimationFrame(() => { root.style.overflowAnchor = ''; });
-      sceneShort = true;
-    }
-  }
+  const r = scene.getBoundingClientRect(), p = clamp01(-r.top / (r.height - sc.H));
   const t = clamp01((p - .15) / .7), e = t * t * (3 - 2 * t);
   if (e >= 1) mon.style.transform = 'none';
   else mon.style.transform = `translate3d(0,${(sc.dy * (1 - e)).toFixed(2)}px,0) scale(${(sc.s0 * Math.pow(1 / sc.s0, e)).toFixed(5)})`;
