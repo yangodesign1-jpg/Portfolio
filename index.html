@@ -369,8 +369,8 @@ p{margin:0}
 [dir="rtl"] .bio .portrait{margin-inline-start:auto}
 @media (max-width:640px){.portrait{width:4.9em}.mb-base{height:4.8em}}
 /* her photo with the cat (background removed, flipped to face the text): floats on the end side of the bio, and the text wraps into the empty space above the cat */
-.about-me{float:right;width:44%;margin:.1em 0 .4em .5em;shape-outside:polygon(47% 0,40% 6%,38% 46%,0 50%,0 100%,100% 100%,100% 0);shape-margin:14px;pointer-events:none}
-[dir="rtl"] .about-me{float:left;margin:.1em .5em .4em 0;shape-outside:polygon(53% 0,60% 6%,62% 46%,100% 50%,100% 100%,0 100%,0 0)}
+.about-me{float:right;width:44%;margin:.1em 0 .4em .5em;shape-outside:polygon(47% 0,40% 6%,37% 38%,0 42%,0 100%,100% 100%,100% 0);shape-margin:14px;pointer-events:none}
+[dir="rtl"] .about-me{float:left;margin:.1em .5em .4em 0;shape-outside:polygon(53% 0,60% 6%,63% 38%,100% 42%,100% 100%,0 100%,0 0)}
 .about-me img{display:block;width:100%;height:auto}
 [dir="rtl"] .about-me img{transform:scaleX(-1)}
 @media (max-width:640px){.about-me,[dir="rtl"] .about-me{float:none;width:100%;margin:0 0 .5em;shape-outside:none}}
@@ -390,8 +390,10 @@ p{margin:0}
 .lay-h{position:absolute;right:-14px;bottom:-14px;width:26px;height:26px;border-radius:50%;background:#0A84FF;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);cursor:nwse-resize;touch-action:none}
 
 /* the iPad and a big "ABOUT" stand side by side on one line, the word as tall as the iPad (JS fits it); its letters drop in like the name at the top */
-.ab-top{display:flex;align-items:flex-end;gap:.35em;margin:0 0 1.2em}
-.ab-top .portrait{margin:0!important;flex:none;width:4.7em}
+.ab-top{display:flex;align-items:flex-start;gap:.35em;margin:0 0 1.2em}
+.ab-top .portrait{margin:0!important;margin-inline-end:-.42em!important;flex:none;width:4.7em;position:relative;z-index:3;rotate:-11deg;translate:0 -.08em;filter:drop-shadow(.06em .18em .22em rgba(0,0,0,.22))}
+[dir=rtl] .ab-top .portrait{rotate:11deg}
+@media (max-width:640px){.ab-top .portrait{margin-inline-end:-.3em!important}}
 @media (max-width:640px){.ab-top .portrait{width:4.4em}}
 .ab-big{display:block;font-weight:600;text-transform:uppercase;letter-spacing:-.045em;line-height:.74;white-space:nowrap;color:var(--ink);margin-bottom:-.02em}
 [dir=rtl] .ab-big{letter-spacing:0}
@@ -400,7 +402,12 @@ p{margin:0}
 .ab-big.go .ch{transform-origin:50% 92%;animation:chDrop 1.05s both;animation-delay:calc(var(--i) * 90ms)}
 @media (prefers-reduced-motion:reduce){.ab-big.pre .ch{opacity:1;transform:none}.ab-big.go .ch{animation:none}}
 /* desktop: the photo starts a little above the first line and ends on the last line (JS sizes it so the two bottoms meet) */
-@media (min-width:641px){.about-me{margin-top:-.7em}}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform 1.1s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms)}
+.ab-top .portrait.rv{transform:translateY(24px) rotate(-4deg)}
+.about-me.rv{transform:translateY(60px) scale(.94);transform-origin:50% 100%}
+.rv.in{opacity:1;transform:none}
+.ab-measure .rv{transform:none!important;transition:none!important}
+.about-me{position:relative;z-index:2}
 /* ---------- weddings ---------- */
 .wed{padding-block:clamp(80px,10vw,150px) 0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}
 .wed h2{grid-column:1/-1;font-size:var(--s-h2);letter-spacing:-.02em}
@@ -685,7 +692,7 @@ From the first idea to the real thing.</p>
   </div>
   <div class="bio">
     <div class="ab-top"><span class="portrait"><span class="mb-lid"><span class="pf"><img id="pf-img" src="about/frames/f00.webp" alt="" width="480" height="480" decoding="async"><svg class="pc-ui" viewBox="0 0 100 144" preserveAspectRatio="xMidYMin slice" aria-hidden="true"><rect width="100" height="8" fill="#1C1C1E" opacity=".86"/><text x="3" y="5.4" font-size="3.4" font-family="-apple-system,Helvetica,Arial,sans-serif" fill="#fff">Gallery</text><g fill="none" stroke="#fff" stroke-width=".55" stroke-linecap="round" stroke-linejoin="round"><path d="M18.2 5.6l2.6-2.6m-.4-.6a1 1 0 1 0 1 1"/><path d="M24 5.6l2.4-2.4M27 2.2l.3.6.6.3-.6.3-.3.6-.3-.6-.6-.3.6-.3z"/><path d="M32.6 2.6c-.6-.5-2-.4-2 .5 0 1.2 2.2.8 2.2 2 0 .9-1.5 1-2.2.4"/><path d="M36 4h3m-.9-.9.9.9-.9.9M37.5 2.5v3"/><path d="M66 5.8l2.6-3.2.5.4-2.6 3.2z"/><path d="M72.6 5.8c0-1.4 1.2-1.8 1.6-3.4.5 1.6 1.4 2 1 3.4"/><path d="M79.6 5.6l2.2-2.4 1 .9-2.2 2.4z"/><rect x="85.4" y="2.4" width="2.6" height="2.6" rx=".3"/><path d="M85 3.4v2.2h2.4"/></g><circle cx="94.2" cy="4" r="1.9" fill="#2F80FF" stroke="#fff" stroke-width=".4"/><rect x="1.6" y="44" width="4.6" height="48" rx="2.3" fill="#2C2C2E" opacity=".82"/><rect x="3.4" y="47" width="1" height="16" rx=".5" fill="#8E8E93"/><rect x="2.4" y="52" width="3" height="2.6" rx=".6" fill="#fff"/><rect x="2.6" y="65.2" width="2.6" height="2.6" rx=".5" fill="none" stroke="#C7C7CC" stroke-width=".45"/><rect x="3.4" y="70" width="1" height="14" rx=".5" fill="#8E8E93"/><rect x="2.4" y="74" width="3" height="2.6" rx=".6" fill="#fff"/><g fill="none" stroke="#fff" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.1 86.4h-2.2m.8-.8-.8.8.8.8"/><path d="M2.7 89.6h2.2m-.8-.8.8.8-.8.8"/></g></svg></span></span><span class="mb-base"></span></span><span class="ab-big" aria-hidden="true" data-t="aboutH">About</span></div>
-    <picture class="about-me"><source media="(max-width:640px)" srcset="about/about-cat-m.webp"><img src="about/about-cat.webp" alt="Inbal crouching by a laptop on the floor, a cat walking up to it" width="900" height="765" loading="lazy" decoding="async"></picture>
+    <picture class="about-me"><source media="(max-width:640px)" srcset="about/about-cat-m.webp"><img src="about/about-cat.webp" alt="Inbal crouching by a laptop on the floor, a cat walking up to it" width="900" height="765" decoding="async"></picture>
     <p><strong data-t="bioName">Hi, I’m Inbal Oz.</strong></p>
     <p data-t="bio1">I draw, I design, and I make things move.</p>
     <p data-t="bio2">I use whatever tools the work needs, from a brush and ink to the Adobe apps and AI, and I make sure it works wherever it has to live: in print, on a wall, on packaging or on a billboard.</p>
@@ -1651,59 +1658,82 @@ runIntro();
   }
 })();
 
-/* About: fit the big word to the iPad's height, size the photo so it ends on the text's last line, drop the letters in */
+/* About: the big word is exactly as tall as the iPad (cap top = iPad top, baseline = iPad bottom); her head rises over the word;
+   the photo is sized so its lowest point sits on the text's last line; everything slides in on scroll */
 (function(){
-  const top = document.querySelector('.ab-top'), big = document.querySelector('.ab-big'), port = top && top.querySelector('.portrait'), bio = document.querySelector('.bio');
+  const top = document.querySelector('.ab-top'), big = document.querySelector('.ab-big'), port = top && top.querySelector('.portrait'), lid = top && top.querySelector('.mb-lid'), bio = document.querySelector('.bio');
   if (!top || !big) return;
-  const cv = document.createElement('canvas').getContext('2d');
+  const root = document.documentElement, cv = document.createElement('canvas').getContext('2d');
   function split(){
     const t = big.textContent; big.textContent = '';
     [...t].forEach((c, i) => { const sp = document.createElement('span'); sp.className = 'ch'; sp.style.setProperty('--i', i); sp.textContent = c; big.appendChild(sp); });
   }
-  function fit(){
-    if (document.documentElement.classList.contains('lay-on')) return;
-    fitPhoto();
-    port.style.fontSize = '';
-    const ff = getComputedStyle(big).fontFamily;
-    cv.font = '600 100px ' + ff; const m = cv.measureText(big.textContent.toUpperCase());
-    const cap = (m.actualBoundingBoxAscent || 72) / 100;   // letter height per 1px of font size
-    let h = port.getBoundingClientRect().height, fs = h / cap;
+  function metrics(){
+    const cs = getComputedStyle(big); cv.font = '600 100px ' + cs.fontFamily;
+    const m = cv.measureText(big.textContent.toUpperCase());
+    return {ca:(m.actualBoundingBoxAscent || 72) / 100, fa:(m.fontBoundingBoxAscent || 95) / 100, fd:(m.fontBoundingBoxDescent || 25) / 100};
+  }
+  function fitWord(){
+    const k0 = metrics();
+    big.style.marginTop = '0px';
+    let h = lid.getBoundingClientRect().height, fs = h / k0.ca;
     big.style.fontSize = fs + 'px';
     const room = top.clientWidth - port.offsetWidth - parseFloat(getComputedStyle(top).columnGap || 0);
     if (big.scrollWidth > room) {   // too wide: shrink the word and the iPad together
       const k = room / big.scrollWidth;
       port.style.fontSize = (parseFloat(getComputedStyle(port).fontSize) * k) + 'px';
-      big.style.fontSize = (fs * k) + 'px';
+      h = lid.getBoundingClientRect().height; fs = h / k0.ca; big.style.fontSize = fs + 'px';
     }
+    const lh = parseFloat(getComputedStyle(big).lineHeight) || fs * .74;
+    const capTopInBox = (lh - (k0.fa + k0.fd) * fs) / 2 + (k0.fa - k0.ca) * fs;
+    const lidTop = lid.getBoundingClientRect().top - top.getBoundingClientRect().top;
+    big.style.marginTop = (lidTop - capTopInBox) + 'px';
+    return {capTop: lid.getBoundingClientRect().top, capH: h};
   }
-  function fitPhoto(){
+  function fitPhoto(word){
     const ph = bio.querySelector('.about-me');
-    bio.style.fontSize = ''; if (ph) ph.style.width = '';
-    if (!ph || innerWidth <= 640) return;
-    const ps = bio.querySelectorAll('p'), last = ps[ps.length - 1], base = parseFloat(getComputedStyle(bio).fontSize);
-    // find the photo width (and, if the text is too long for that, a slightly smaller text size) where the photo ends on the last line
-    for (const k of [1, .95, .9, .85, .8, .75]) {
-      const fs = base * k; bio.style.fontSize = fs + 'px';
-      let best = null;
-      for (let w = 30; w <= 72; w += 1) {
-        ph.style.width = w + '%';
-        const e = Math.abs(ph.getBoundingClientRect().bottom - (last.getBoundingClientRect().bottom - .22 * fs));
-        if (!best || e < best.e) best = {w, e};
-      }
-      ph.style.width = best.w + '%';
-      if (best.e < .35 * fs) return;
+    if (!ph || innerWidth <= 640) { if (ph) { ph.style.width = ''; ph.style.marginTop = ''; } return; }
+    const ps = bio.querySelectorAll('p'), first = ps[0], last = ps[ps.length - 1], fs = parseFloat(getComputedStyle(bio).fontSize);
+    // the head reaches up over the lower 45% of the word
+    ph.style.marginTop = '0px';
+    const natTop = ph.getBoundingClientRect().top;
+    ph.style.marginTop = (word.capTop + word.capH * .55 - natTop) + 'px';
+    let best = null;
+    for (let w = 30; w <= 75; w += .5) {
+      ph.style.width = w + '%';
+      const baseLine = last.getBoundingClientRect().bottom - .24 * fs;
+      const e = Math.abs(ph.getBoundingClientRect().bottom - baseLine);
+      if (!best || e < best.e) best = {w, e};
     }
+    ph.style.width = best.w + '%';
+    return best.e / fs;
+  }
+  function fit(){
+    if (root.classList.contains('lay-on')) return;
+    root.classList.add('ab-measure');
+    bio.style.fontSize = ''; port.style.fontSize = '';
+    const base = parseFloat(getComputedStyle(bio).fontSize);
+    for (const k of [1, .95, .9, .85, .8, .75]) {
+      bio.style.fontSize = (base * k) + 'px'; port.style.fontSize = '';
+      const w = fitWord(); const err = fitPhoto(w);
+      if (err === undefined || err < .12) break;
+    }
+    root.classList.remove('ab-measure');
   }
   window.aboutFit = () => { split(); fit(); };
   split();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  const img = bio.querySelector('.about-me img'); if (img && !img.complete) img.addEventListener('load', fit, {once:true});
   let rt = 0; addEventListener('load', fit); addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(fit, 120); }); fit();
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduce && 'IntersectionObserver' in window) {
-    big.classList.add('pre');
-    new IntersectionObserver((es, o) => es.forEach(e => { if (!e.isIntersecting) return; o.disconnect();
-      big.classList.add('go'); requestAnimationFrame(() => big.classList.remove('pre')); setTimeout(() => big.classList.remove('go'), 1800); }), {threshold:.6}).observe(big);
-  }
+  if (reduce || !('IntersectionObserver' in window)) return;
+  big.classList.add('pre');
+  new IntersectionObserver((es, o) => es.forEach(e => { if (!e.isIntersecting) return; o.disconnect();
+    big.classList.add('go'); requestAnimationFrame(() => big.classList.remove('pre')); setTimeout(() => big.classList.remove('go'), 1800); }), {threshold:.5}).observe(big);
+  // entrance for the rest of the section: the iPad, the photo, each line of text, the facts and the steps
+  const groups = [[port], [bio.querySelector('.about-me')], [...bio.querySelectorAll('p')], [...document.querySelectorAll('#about .facts > div')], [...document.querySelectorAll('#about .steps li')]];
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.15, rootMargin:'0px 0px -6% 0px'});
+  groups.forEach(g => g.forEach((el, i) => { if (!el) return; el.classList.add('rv'); el.style.setProperty('--d', (i * 110) + 'ms'); io.observe(el); }));
 })();
 </script>
 
