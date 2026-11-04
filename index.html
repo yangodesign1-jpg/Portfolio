@@ -389,6 +389,18 @@ p{margin:0}
 .lay-on .bio>.lay-it.drag{cursor:grabbing;outline-style:solid}
 .lay-h{position:absolute;right:-14px;bottom:-14px;width:26px;height:26px;border-radius:50%;background:#0A84FF;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);cursor:nwse-resize;touch-action:none}
 
+/* the iPad and a big "ABOUT" stand side by side on one line, the word as tall as the iPad (JS fits it); its letters drop in like the name at the top */
+.ab-top{display:flex;align-items:flex-end;gap:.35em;margin:0 0 1.2em}
+.ab-top .portrait{margin:0!important;flex:none;width:4.7em}
+@media (max-width:640px){.ab-top .portrait{width:4.4em}}
+.ab-big{display:block;font-weight:600;text-transform:uppercase;letter-spacing:-.045em;line-height:.74;white-space:nowrap;color:var(--ink);margin-bottom:-.02em}
+[dir=rtl] .ab-big{letter-spacing:0}
+.ab-big .ch{display:inline-block}
+.ab-big.pre .ch{opacity:0;transform:translateY(-.55em)}
+.ab-big.go .ch{transform-origin:50% 92%;animation:chDrop 1.05s both;animation-delay:calc(var(--i) * 90ms)}
+@media (prefers-reduced-motion:reduce){.ab-big.pre .ch{opacity:1;transform:none}.ab-big.go .ch{animation:none}}
+/* desktop: the photo starts a little above the first line and ends on the last line (JS sizes it so the two bottoms meet) */
+@media (min-width:641px){.about-me{margin-top:-.7em}}
 /* ---------- weddings ---------- */
 .wed{padding-block:clamp(80px,10vw,150px) 0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}
 .wed h2{grid-column:1/-1;font-size:var(--s-h2);letter-spacing:-.02em}
@@ -665,14 +677,14 @@ From the first idea to the real thing.</p>
 </section>
 
 <section class="about wrap" id="about" aria-labelledby="about-h">
-  <h2 id="about-h" data-t="aboutH">About</h2>
+  <h2 id="about-h" class="vh" data-t="aboutH">About</h2>
   <div class="facts">
     <div><b data-t="f1k">Studio</b><span data-t="f1v">Details to come</span></div>
     <div><b data-t="f2k">Languages</b><span data-t="f2v">Hebrew, English</span></div>
     <div><b data-t="f3k">Availability</b><span data-t="f3v">Open to projects</span></div>
   </div>
   <div class="bio">
-    <span class="portrait"><span class="mb-lid"><span class="pf"><img id="pf-img" src="about/frames/f00.webp" alt="" width="480" height="480" decoding="async"><svg class="pc-ui" viewBox="0 0 100 144" preserveAspectRatio="xMidYMin slice" aria-hidden="true"><rect width="100" height="8" fill="#1C1C1E" opacity=".86"/><text x="3" y="5.4" font-size="3.4" font-family="-apple-system,Helvetica,Arial,sans-serif" fill="#fff">Gallery</text><g fill="none" stroke="#fff" stroke-width=".55" stroke-linecap="round" stroke-linejoin="round"><path d="M18.2 5.6l2.6-2.6m-.4-.6a1 1 0 1 0 1 1"/><path d="M24 5.6l2.4-2.4M27 2.2l.3.6.6.3-.6.3-.3.6-.3-.6-.6-.3.6-.3z"/><path d="M32.6 2.6c-.6-.5-2-.4-2 .5 0 1.2 2.2.8 2.2 2 0 .9-1.5 1-2.2.4"/><path d="M36 4h3m-.9-.9.9.9-.9.9M37.5 2.5v3"/><path d="M66 5.8l2.6-3.2.5.4-2.6 3.2z"/><path d="M72.6 5.8c0-1.4 1.2-1.8 1.6-3.4.5 1.6 1.4 2 1 3.4"/><path d="M79.6 5.6l2.2-2.4 1 .9-2.2 2.4z"/><rect x="85.4" y="2.4" width="2.6" height="2.6" rx=".3"/><path d="M85 3.4v2.2h2.4"/></g><circle cx="94.2" cy="4" r="1.9" fill="#2F80FF" stroke="#fff" stroke-width=".4"/><rect x="1.6" y="44" width="4.6" height="48" rx="2.3" fill="#2C2C2E" opacity=".82"/><rect x="3.4" y="47" width="1" height="16" rx=".5" fill="#8E8E93"/><rect x="2.4" y="52" width="3" height="2.6" rx=".6" fill="#fff"/><rect x="2.6" y="65.2" width="2.6" height="2.6" rx=".5" fill="none" stroke="#C7C7CC" stroke-width=".45"/><rect x="3.4" y="70" width="1" height="14" rx=".5" fill="#8E8E93"/><rect x="2.4" y="74" width="3" height="2.6" rx=".6" fill="#fff"/><g fill="none" stroke="#fff" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.1 86.4h-2.2m.8-.8-.8.8.8.8"/><path d="M2.7 89.6h2.2m-.8-.8.8.8-.8.8"/></g></svg></span></span><span class="mb-base"></span></span>
+    <div class="ab-top"><span class="portrait"><span class="mb-lid"><span class="pf"><img id="pf-img" src="about/frames/f00.webp" alt="" width="480" height="480" decoding="async"><svg class="pc-ui" viewBox="0 0 100 144" preserveAspectRatio="xMidYMin slice" aria-hidden="true"><rect width="100" height="8" fill="#1C1C1E" opacity=".86"/><text x="3" y="5.4" font-size="3.4" font-family="-apple-system,Helvetica,Arial,sans-serif" fill="#fff">Gallery</text><g fill="none" stroke="#fff" stroke-width=".55" stroke-linecap="round" stroke-linejoin="round"><path d="M18.2 5.6l2.6-2.6m-.4-.6a1 1 0 1 0 1 1"/><path d="M24 5.6l2.4-2.4M27 2.2l.3.6.6.3-.6.3-.3.6-.3-.6-.6-.3.6-.3z"/><path d="M32.6 2.6c-.6-.5-2-.4-2 .5 0 1.2 2.2.8 2.2 2 0 .9-1.5 1-2.2.4"/><path d="M36 4h3m-.9-.9.9.9-.9.9M37.5 2.5v3"/><path d="M66 5.8l2.6-3.2.5.4-2.6 3.2z"/><path d="M72.6 5.8c0-1.4 1.2-1.8 1.6-3.4.5 1.6 1.4 2 1 3.4"/><path d="M79.6 5.6l2.2-2.4 1 .9-2.2 2.4z"/><rect x="85.4" y="2.4" width="2.6" height="2.6" rx=".3"/><path d="M85 3.4v2.2h2.4"/></g><circle cx="94.2" cy="4" r="1.9" fill="#2F80FF" stroke="#fff" stroke-width=".4"/><rect x="1.6" y="44" width="4.6" height="48" rx="2.3" fill="#2C2C2E" opacity=".82"/><rect x="3.4" y="47" width="1" height="16" rx=".5" fill="#8E8E93"/><rect x="2.4" y="52" width="3" height="2.6" rx=".6" fill="#fff"/><rect x="2.6" y="65.2" width="2.6" height="2.6" rx=".5" fill="none" stroke="#C7C7CC" stroke-width=".45"/><rect x="3.4" y="70" width="1" height="14" rx=".5" fill="#8E8E93"/><rect x="2.4" y="74" width="3" height="2.6" rx=".6" fill="#fff"/><g fill="none" stroke="#fff" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.1 86.4h-2.2m.8-.8-.8.8.8.8"/><path d="M2.7 89.6h2.2m-.8-.8.8.8-.8.8"/></g></svg></span></span><span class="mb-base"></span></span><span class="ab-big" aria-hidden="true" data-t="aboutH">About</span></div>
     <picture class="about-me"><source media="(max-width:640px)" srcset="about/about-cat-m.webp"><img src="about/about-cat.webp" alt="Inbal crouching by a laptop on the floor, a cat walking up to it" width="900" height="765" loading="lazy" decoding="async"></picture>
     <p><strong data-t="bioName">Hi, I’m Inbal Oz.</strong></p>
     <p data-t="bio1">I draw, I design, and I make things move.</p>
@@ -851,7 +863,7 @@ function applyLang(){
   site.lang = L; site.dir = L === 'he' ? 'rtl' : 'ltr';
   document.documentElement.lang = L;
   // data-br: line breaks become real <br>, so they survive the line-by-line text animation (SplitText ignores plain newlines)
-  document.querySelectorAll('[data-t]').forEach(el => { const v = T[L][el.dataset.t]; if (v == null) return; if (el.hasAttribute('data-br')) el.innerHTML = String(v).split('\n').map(esc).join('<br>'); else el.textContent = v; });
+  document.querySelectorAll('[data-t]').forEach(el => { const v = T[L][el.dataset.t]; if (v == null) return; if (el.hasAttribute('data-br')) el.innerHTML = String(v).split('\n').map(esc).join('<br>'); else el.textContent = v; }); if (window.aboutFit) aboutFit();
   const btn = document.getElementById('lang');
   btn.textContent = L === 'he' ? 'EN' : 'עב';
   btn.setAttribute('aria-label', T[L].langBtn);
@@ -1226,7 +1238,7 @@ function initMotion(){
   if (motion) motion.revert();
   motion = gsap.matchMedia();
   motion.add('(prefers-reduced-motion: no-preference)', () => {
-    document.querySelectorAll('.drawer-head p,.sheet-lead h3,.sheet-lead p,#about-h,#contact-h').forEach(el => {
+    document.querySelectorAll('.drawer-head p,.sheet-lead h3,.sheet-lead p,#contact-h').forEach(el => {
       SplitText.create(el, {type:'lines', mask:'lines', linesClass:'ln-line', autoSplit:true, onSplit(self){
         return gsap.from(self.lines, {yPercent:105, duration:1, ease:'power3.out', stagger:.08,
           scrollTrigger:{trigger:el, start:'top 88%', once:true}});
@@ -1586,7 +1598,7 @@ runIntro();
   function start(){
     const bio = document.querySelector('.bio'); if (!bio) return;
     document.getElementById('about').scrollIntoView({behavior:'instant', block:'start'});
-    const kids = [...bio.children].filter(el => el.matches('.portrait,.about-me,p'));
+    const kids = [...bio.children].filter(el => el.matches('.ab-top,.about-me,p'));
     const br = bio.getBoundingClientRect();
     const rects = kids.map(el => { const r = el.getBoundingClientRect(); return {x:r.left-br.left, y:r.top-br.top, w:r.width}; });
     document.documentElement.classList.add('lay-on'); btn.hidden = true;
@@ -1624,7 +1636,7 @@ runIntro();
   }
   async function save(bio){
     const bw = bio.clientWidth, fs = parseFloat(getComputedStyle(bio).fontSize);
-    const name = el => el.matches('.portrait') ? 'ipad' : el.matches('.about-me') ? 'photo' : (el.dataset.t || el.querySelector('[data-t]')?.dataset.t || 'p');
+    const name = el => el.matches('.ab-top') ? 'ipad+about' : el.matches('.about-me') ? 'photo' : (el.dataset.t || el.querySelector('[data-t]')?.dataset.t || 'p');
     const layout = items.map(el => ({part:name(el), x:+(el.offsetLeft/bw*100).toFixed(2), y_em:+(el.offsetTop/fs).toFixed(2), w:+(el.offsetWidth/bw*100).toFixed(2)}));
     const rec = {layout, bioWidth:bw, fontPx:fs, viewport:innerWidth+'x'+innerHeight, phone:innerWidth<=640, lang:he()?'he':'en', at:new Date().toISOString()};
     const span = bar.querySelector('span');
@@ -1636,6 +1648,61 @@ runIntro();
       try { await navigator.clipboard.writeText(JSON.stringify(rec)); span.textContent = W('הועתק. תדביקי לי בצ׳אט', 'Copied. Paste it to me in the chat'); }
       catch (e2) { span.textContent = W('לא הצלחתי לשמור', 'Could not save'); }
     }
+  }
+})();
+
+/* About: fit the big word to the iPad's height, size the photo so it ends on the text's last line, drop the letters in */
+(function(){
+  const top = document.querySelector('.ab-top'), big = document.querySelector('.ab-big'), port = top && top.querySelector('.portrait'), bio = document.querySelector('.bio');
+  if (!top || !big) return;
+  const cv = document.createElement('canvas').getContext('2d');
+  function split(){
+    const t = big.textContent; big.textContent = '';
+    [...t].forEach((c, i) => { const sp = document.createElement('span'); sp.className = 'ch'; sp.style.setProperty('--i', i); sp.textContent = c; big.appendChild(sp); });
+  }
+  function fit(){
+    if (document.documentElement.classList.contains('lay-on')) return;
+    fitPhoto();
+    port.style.fontSize = '';
+    const ff = getComputedStyle(big).fontFamily;
+    cv.font = '600 100px ' + ff; const m = cv.measureText(big.textContent.toUpperCase());
+    const cap = (m.actualBoundingBoxAscent || 72) / 100;   // letter height per 1px of font size
+    let h = port.getBoundingClientRect().height, fs = h / cap;
+    big.style.fontSize = fs + 'px';
+    const room = top.clientWidth - port.offsetWidth - parseFloat(getComputedStyle(top).columnGap || 0);
+    if (big.scrollWidth > room) {   // too wide: shrink the word and the iPad together
+      const k = room / big.scrollWidth;
+      port.style.fontSize = (parseFloat(getComputedStyle(port).fontSize) * k) + 'px';
+      big.style.fontSize = (fs * k) + 'px';
+    }
+  }
+  function fitPhoto(){
+    const ph = bio.querySelector('.about-me');
+    bio.style.fontSize = ''; if (ph) ph.style.width = '';
+    if (!ph || innerWidth <= 640) return;
+    const ps = bio.querySelectorAll('p'), last = ps[ps.length - 1], base = parseFloat(getComputedStyle(bio).fontSize);
+    // find the photo width (and, if the text is too long for that, a slightly smaller text size) where the photo ends on the last line
+    for (const k of [1, .95, .9, .85, .8, .75]) {
+      const fs = base * k; bio.style.fontSize = fs + 'px';
+      let best = null;
+      for (let w = 30; w <= 72; w += 1) {
+        ph.style.width = w + '%';
+        const e = Math.abs(ph.getBoundingClientRect().bottom - (last.getBoundingClientRect().bottom - .22 * fs));
+        if (!best || e < best.e) best = {w, e};
+      }
+      ph.style.width = best.w + '%';
+      if (best.e < .35 * fs) return;
+    }
+  }
+  window.aboutFit = () => { split(); fit(); };
+  split();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  let rt = 0; addEventListener('load', fit); addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(fit, 120); }); fit();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    big.classList.add('pre');
+    new IntersectionObserver((es, o) => es.forEach(e => { if (!e.isIntersecting) return; o.disconnect();
+      big.classList.add('go'); requestAnimationFrame(() => big.classList.remove('pre')); setTimeout(() => big.classList.remove('go'), 1800); }), {threshold:.6}).observe(big);
   }
 })();
 </script>
