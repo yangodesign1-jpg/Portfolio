@@ -1250,7 +1250,7 @@ if (!reduce) {
   const img = document.getElementById('pf-img');
   if (!img) return;
   const PF_FIRST = 1500, PF_STEP = matchMedia('(max-width:640px)').matches ? 650 : 600;
-  const N = 15, src = i => `about/frames/f${String(i).padStart(2, '0')}.webp`;
+  const N = 14, src = i => `about/frames/f${String(i).padStart(2, '0')}.webp`;
   if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
   let i = 0, t = 0, seen = false, hover = false, loaded = false;
   const load = () => { if (loaded) return; loaded = true; for (let k = 1; k < N; k++) { const im = new Image(); im.src = src(k); } };
