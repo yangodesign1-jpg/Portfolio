@@ -231,8 +231,8 @@ p{margin:0}
 .mdock i::after{content:attr(data-n);position:absolute;left:50%;bottom:calc(100% + 1.1cqw);transform:translateX(-50%);white-space:nowrap;padding:.35cqw .9cqw;border-radius:.9cqw;font:500 max(10px,1.15cqw)/1.2 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter Tight",sans-serif;color:#fff;background:rgba(255,255,255,.18);-webkit-backdrop-filter:blur(10px) saturate(1.6);backdrop-filter:blur(10px) saturate(1.6);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.45),0 .3cqw 1cqw rgba(0,0,0,.18);text-shadow:0 1px 2px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .12s}
 @media (hover:hover){.mdock i:hover::after{opacity:1}}
 /* phone: the whole dock does not fit, so it keeps bigger icons and slides sideways under a finger */
-/* phone: all 36 apps stay visible, in two rows of 18 (no sideways scrolling) */
-@media (max-width:767px){.mdock{left:3cqw;right:3cqw;transform:none;flex-wrap:wrap;justify-content:center;row-gap:1.4cqw;column-gap:.6cqw;padding:1cqw 1cqw 1.4cqw;border-radius:2.4cqw}.mdock .sep{display:none}.mdock i{width:4.45cqw}.mdock i.on::before{width:.55cqw;height:.55cqw;margin-left:-.275cqw;bottom:-.75cqw}}
+/* phone: all 36 apps in one row like her Mac, just smaller, and the dock sits a little lower */
+@media (max-width:767px){.mdock{left:2cqw;right:2cqw;transform:none;justify-content:space-between;gap:0;bottom:.8cqw;padding:.6cqw .7cqw .9cqw;border-radius:1.4cqw}.mdock i{width:2.42cqw}.mdock .sep{margin-inline:.15cqw}.mdock i.on::before{width:.32cqw;height:.32cqw;margin-left:-.16cqw;bottom:-.55cqw}}
 
 .js-scene .scene{height:320svh}
 .js-scene .desk-at{top:calc(100% - 100svh)}
