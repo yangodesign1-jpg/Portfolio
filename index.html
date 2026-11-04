@@ -391,8 +391,8 @@ p{margin:0}
 
 /* the iPad and a big "ABOUT" stand side by side on one line, the word as tall as the iPad (JS fits it); its letters drop in like the name at the top */
 .ab-top{display:flex;align-items:flex-start;gap:.35em;margin:0 0 1.2em}
-.ab-top .portrait{margin:0!important;margin-inline-end:-.42em!important;flex:none;width:4.7em;position:relative;z-index:3;rotate:-11deg;translate:0 -.08em;filter:drop-shadow(.06em .18em .22em rgba(0,0,0,.22))}
-[dir=rtl] .ab-top .portrait{rotate:11deg}
+.ab-top .portrait{margin:0!important;margin-inline-end:-.3em!important;flex:none;width:4.7em;position:relative;z-index:3;rotate:-6deg;translate:0 -.04em;filter:drop-shadow(.06em .18em .22em rgba(0,0,0,.22))}
+[dir=rtl] .ab-top .portrait{rotate:6deg}
 @media (max-width:640px){.ab-top .portrait{margin-inline-end:-.3em!important}}
 @media (max-width:640px){.ab-top .portrait{width:4.4em}}
 .ab-big{display:block;font-weight:600;text-transform:uppercase;letter-spacing:-.045em;line-height:.74;white-space:nowrap;color:var(--ink);margin-bottom:-.02em}
@@ -1674,22 +1674,25 @@ runIntro();
     return {ca:(m.actualBoundingBoxAscent || 72) / 100, fa:(m.fontBoundingBoxAscent || 95) / 100, fd:(m.fontBoundingBoxDescent || 25) / 100};
   }
   function fitWord(){
-    const k0 = metrics();
-    big.style.marginTop = '0px';
-    let h = lid.getBoundingClientRect().height, fs = h / k0.ca;
+    const k0 = metrics(), phone = innerWidth <= 640;
+    big.style.marginTop = '0px'; port.style.fontSize = '';
+    // the word takes a set share of the column (smaller on desktop), and the iPad is then sized to the word's letter height
+    const share = phone ? .68 : (he() ? .42 : .5);
+    big.style.fontSize = '100px';
+    const fs = 100 * (top.clientWidth * share) / big.scrollWidth;
     big.style.fontSize = fs + 'px';
-    const room = top.clientWidth - port.offsetWidth - parseFloat(getComputedStyle(top).columnGap || 0);
-    if (big.scrollWidth > room) {   // too wide: shrink the word and the iPad together
-      const k = room / big.scrollWidth;
-      port.style.fontSize = (parseFloat(getComputedStyle(port).fontSize) * k) + 'px';
-      h = lid.getBoundingClientRect().height; fs = h / k0.ca; big.style.fontSize = fs + 'px';
-    }
+    const capH = fs * k0.ca;
+    const pfs = parseFloat(getComputedStyle(port).fontSize), lh0 = lid.getBoundingClientRect().height / Math.cos(tilt());
+    port.style.fontSize = (pfs * capH / lh0) + 'px';
     const lh = parseFloat(getComputedStyle(big).lineHeight) || fs * .74;
     const capTopInBox = (lh - (k0.fa + k0.fd) * fs) / 2 + (k0.fa - k0.ca) * fs;
-    const lidTop = lid.getBoundingClientRect().top - top.getBoundingClientRect().top;
+    const r = port.getBoundingClientRect(), rt = top.getBoundingClientRect();
+    const lidTop = (r.top + r.height / 2 - capH / 2) - rt.top;   // centre of the (tilted) iPad, minus half the letter height
     big.style.marginTop = (lidTop - capTopInBox) + 'px';
-    return {capTop: lid.getBoundingClientRect().top, capH: h};
+    return {capTop: rt.top + lidTop, capH};
   }
+  const he = () => document.documentElement.dir === 'rtl';
+  const tilt = () => Math.abs(parseFloat(getComputedStyle(port).rotate) || 0) * Math.PI / 180;
   function fitPhoto(word){
     const ph = bio.querySelector('.about-me');
     if (!ph || innerWidth <= 640) { if (ph) { ph.style.width = ''; ph.style.marginTop = ''; } return; }
