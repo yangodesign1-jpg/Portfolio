@@ -878,6 +878,8 @@ function closeFolder(){
 /* ---------------- language ---------------- */
 function applyLang(){
   const L = lang;
+  // undo the word-by-word split first, or its revert later would put back the old language's text (bug 2026-11-05)
+  if (motion) { motion.revert(); motion = null; }
   site.lang = L; site.dir = L === 'he' ? 'rtl' : 'ltr';
   document.documentElement.lang = L;
   // data-br: line breaks become real <br>, so they survive the line-by-line text animation (SplitText ignores plain newlines)
