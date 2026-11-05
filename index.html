@@ -66,6 +66,7 @@ p{margin:0}
 :root[data-theme="dark"] .hero .eye .rim{stroke:var(--field);stroke-width:2.4}
 .bar .mark{display:block;width:clamp(88px,9vw,118px);aspect-ratio:700/179;background:currentColor;-webkit-mask:url(signature.png) center/contain no-repeat;mask:url(signature.png) center/contain no-repeat;text-decoration:none;font-size:0;color:inherit}
 .bar nav{display:flex;gap:clamp(12px,2.4vw,28px);align-items:center;font-size:15px}
+[dir="rtl"] .bar{direction:ltr} /* Hebrew: the bar keeps the English layout (logo left, links + switch + language on the right), only the words change (user, 2026-11-05) */
 .bar nav a{text-decoration:none;padding-block:10px}
 .bar nav a:hover{text-decoration:underline;text-underline-offset:4px}
 .lang{min-width:44px;min-height:44px;font-weight:600;font-size:14px}
