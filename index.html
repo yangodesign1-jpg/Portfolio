@@ -1745,10 +1745,13 @@ runIntro();
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce || !('IntersectionObserver' in window)) return;
   big.classList.add('pre');
+  // first the iPad drops in, then the letters of the word fall one by one (user 2026-11-05)
   new IntersectionObserver((es, o) => es.forEach(e => { if (!e.isIntersecting) return; o.disconnect();
-    big.classList.add('go'); requestAnimationFrame(() => big.classList.remove('pre')); setTimeout(() => big.classList.remove('go'), 1800); }), {threshold:.5}).observe(big);
+    port.classList.add('in');
+    setTimeout(() => { big.classList.add('go'); requestAnimationFrame(() => big.classList.remove('pre')); setTimeout(() => big.classList.remove('go'), 1800); }, 620); }), {threshold:.5}).observe(big);
   // entrance for the rest of the section: the iPad, the photo, each line of text, the facts and the steps
-  const groups = [[port], [bio.querySelector('.about-me')], [...bio.querySelectorAll('p')], [...document.querySelectorAll('#about .facts > div')], [...document.querySelectorAll('#about .steps li')]];
+  port.classList.add('rv');
+  const groups = [[bio.querySelector('.about-me')], [...bio.querySelectorAll('p')], [...document.querySelectorAll('#about .facts > div')], [...document.querySelectorAll('#about .steps li')]];
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.15, rootMargin:'0px 0px -6% 0px'});
   groups.forEach(g => g.forEach((el, i) => { if (!el) return; el.classList.add('rv'); el.style.setProperty('--d', (i * 110) + 'ms'); io.observe(el); }));
 })();
