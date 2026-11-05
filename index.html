@@ -483,9 +483,9 @@ p{margin:0}
 .fb-send{min-height:44px;padding:0 22px;border-radius:999px;background:rgba(255,255,255,.16);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.3);font-weight:500}
 #fb-msg{font-size:var(--s-small);opacity:.85}
 /* ---------- contact (2026-11-01): dark band, small label, huge uppercase headline, segmented buttons that fill on hover ---------- */
-.contact{--c-fg:#0c1a3d;--c-on:#F4F3F1;--c-dim:rgba(12,26,61,.62);--c-line:rgba(12,26,61,.2);position:relative;overflow:hidden;background:linear-gradient(180deg,var(--paper) 0,#E9EDF0 30%,#D3E2EF 72%,#C7DBEC 100%);color:var(--c-fg);padding-block:clamp(96px,11vw,170px) clamp(72px,8vw,120px)}
+.contact{--c-fg:var(--ink);--c-on:var(--paper);--c-dim:rgba(30,28,26,.62);--c-line:rgba(30,28,26,.2);position:relative;overflow:hidden;background:var(--paper);color:var(--c-fg);padding-block:clamp(96px,11vw,170px) clamp(72px,8vw,120px)}
 /* colours follow the sky above the computer: light = page colour into pale sky blue, dark = page colour into night navy */
-:root[data-theme="dark"] .contact{--c-fg:#EEF2FA;--c-on:#0B1532;--c-dim:rgba(238,242,250,.66);--c-line:rgba(238,242,250,.2);background:linear-gradient(180deg,var(--paper) 0,#121A2E 45%,#0B1532 100%);color:var(--c-fg)}
+:root[data-theme="dark"] .contact{--c-fg:var(--ink);--c-on:var(--paper);--c-dim:rgba(241,239,236,.66);--c-line:rgba(241,239,236,.2);background:var(--paper);color:var(--c-fg)} /* contact + footer share the page colour of the section above (user 2026-11-05) */
 .ct{max-width:1600px;margin-inline:auto}
 .c-lbl{font:600 13px/1 "Inter Tight","Heebo",sans-serif;letter-spacing:.28em;text-transform:uppercase;margin:0 0 clamp(40px,4.6vw,72px)}
 .c-show{font:500 clamp(18px,1.6vw,24px)/1.3 "Inter Tight","Heebo",sans-serif;color:var(--c-dim);margin:0 0 14px;letter-spacing:-.01em}
@@ -549,9 +549,12 @@ p{margin:0}
 @media (max-width:640px){.cols{grid-template-columns:1fr 1fr;row-gap:32px}}
 .foot .name{margin-top:12svh}
 /* light theme: the footer flips to a light field, with the name in dark ink */
-:root:not([data-theme="dark"]) .foot{--field:#E6E3DD;color:#1E1C1A}
+:root:not([data-theme="dark"]) .foot{--field:var(--paper);color:var(--ink)} /* footer = same page colour as contact and the sections above (user 2026-11-05) */
+:root[data-theme="dark"] .foot{--field:var(--paper);color:var(--ink)}
+.foot{--ink-trail:#000;overflow:hidden}:root[data-theme="dark"] .foot{--ink-trail:#F4F3F1}
+.foot>*:not(.c-ink){position:relative;z-index:1}
 :root:not([data-theme="dark"]) .foot .cols a,:root:not([data-theme="dark"]) .foot .cols span{color:rgba(30,28,26,.72)}
-:root:not([data-theme="dark"]) .foot .cols a:hover{color:#1E1C1A}
+:root:not([data-theme="dark"]) .foot .cols a:hover{color:var(--ink)}
 :root:not([data-theme="dark"]) .foot .legal{color:rgba(30,28,26,.6)}
 :root:not([data-theme="dark"]) .foot #fb-t{background:rgba(30,28,26,.06);border-color:rgba(30,28,26,.28)}
 :root:not([data-theme="dark"]) .foot .fb-send{background:rgba(30,28,26,.1);box-shadow:inset 0 0 0 .5px rgba(30,28,26,.3)}
@@ -736,6 +739,7 @@ From the first idea to the real thing.</p>
 </section>
 
 <footer class="foot wrap" aria-labelledby="foot-h">
+  <canvas class="c-ink" aria-hidden="true"></canvas>
   <h2 class="vh" id="foot-h" data-t="footH">Navigation and details</h2>
   <div class="cols">
     <div><b data-t="c1">On this site</b><a href="#work" data-t="nWork">Work</a><a href="#about" data-t="nAbout">About</a><a href="#contact" data-t="nContact">Contact</a></div>
@@ -1200,8 +1204,11 @@ document.getElementById('copy').addEventListener('click', e => {
 
 /* contact buttons: a dark pill label follows the pointer, and the pointer leaves a short ink stroke (desktop only) */
 (function(){
-  const sec = document.getElementById('contact'), cv = document.getElementById('c-ink'), pill = document.getElementById('c-pill');
-  if (!sec || !cv || !matchMedia('(hover:hover) and (pointer:fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const pill = document.getElementById('c-pill');
+  if (!matchMedia('(hover:hover) and (pointer:fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // the same ink trail runs over the contact section and the footer under it
+  document.querySelectorAll('#contact,.foot').forEach(sec => { const cv = sec.querySelector('.c-ink'); if (cv) ink(sec, cv); });
+  function ink(sec, cv){
   const ctx = cv.getContext('2d'); let pts = [], raf = 0, dpr = 1;
   const size = () => { dpr = Math.min(2, devicePixelRatio || 1); cv.width = sec.clientWidth * dpr; cv.height = sec.clientHeight * dpr; };
   size(); addEventListener('resize', size); if ('ResizeObserver' in window) new ResizeObserver(size).observe(sec);
@@ -1226,6 +1233,7 @@ document.getElementById('copy').addEventListener('click', e => {
     else pill.classList.remove('on');
   });
   sec.addEventListener('pointerleave', () => pill.classList.remove('on'));
+  }
 })();
 
 /* ---------------- entrances ---------------- */
