@@ -1222,9 +1222,13 @@ document.getElementById('copy').addEventListener('click', e => {
   if (!matchMedia('(hover:hover) and (pointer:fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   // the same ink trail runs over the contact section and the footer under it
   document.querySelectorAll('#contact,.foot').forEach(sec => { const cv = sec.querySelector('.c-ink'); if (cv) ink(sec, cv); });
-  // muted, grown-up inks: cobalt, terracotta, ochre, sage, plum (lighter versions for dark mode)
-  const INK_L = ['#2E5AAC','#B5543C','#C49A3A','#5E7F63','#6E4A63'], INK_D = ['#7FA4E6','#E08B72','#E2BE6E','#9DBF9F','#B993AE'];
-  let inkC = -1, inkFrom = 0;
+  // muted inks in a ring of neighbours (cobalt, slate violet, plum, terracotta, ochre, sage, teal), lighter for dark mode;
+  // the line slides slowly from one to the next while you draw
+  const INK_L = ['#2E5AAC','#4F4F9A','#6E4A63','#B5543C','#C49A3A','#5E7F63','#2F7480'], INK_D = ['#7FA4E6','#9C9BDC','#B993AE','#E08B72','#E2BE6E','#9DBF9F','#7CBCC6'];
+  const hex = h => [1,3,5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const PAL_L = INK_L.map(hex), PAL_D = INK_D.map(hex);
+  let inkT = 0, inkLast = 0;
+  const inkAt = (pal, u) => { const i = Math.floor(u) % pal.length, f = u - Math.floor(u), A = pal[i], B = pal[(i + 1) % pal.length]; return `rgb(${A.map((v, k) => Math.round(v + (B[k] - v) * f)).join(',')})`; };
   function ink(sec, cv){
   const ctx = cv.getContext('2d'); let pts = [], raf = 0, dpr = 1;
   const size = () => { dpr = Math.min(2, devicePixelRatio || 1); cv.width = sec.clientWidth * dpr; cv.height = sec.clientHeight * dpr; };
@@ -1237,16 +1241,16 @@ document.getElementById('copy').addEventListener('click', e => {
     ctx.lineCap = 'round'; ctx.lineJoin = 'round';
     for (let k = 1; k < pts.length; k++) {
       const a = pts[k-1], b = pts[k], life = 1 - (now - b.t) / 520;
-      ctx.globalAlpha = Math.min(1, Math.max(0, life * 1.6)); ctx.lineWidth = (1.5 + 8 * life) * dpr; ctx.strokeStyle = (dark ? INK_D : INK_L)[b.c];
+      ctx.globalAlpha = Math.min(1, Math.max(0, life * 1.6)); ctx.lineWidth = (1.5 + 8 * life) * dpr; ctx.strokeStyle = inkAt(dark ? PAL_D : PAL_L, b.c);
       ctx.beginPath(); ctx.moveTo(a.x * dpr, a.y * dpr); ctx.lineTo(b.x * dpr, b.y * dpr); ctx.stroke();
     }
     raf = pts.length ? requestAnimationFrame(draw) : 0;
   };
   sec.addEventListener('pointermove', e => {
     const r = sec.getBoundingClientRect(); const now = performance.now();
-    // one calm colour per stroke; a new stroke (or ~1.8s of drawing) moves on to the next shade
-    if (!pts.length || now - inkFrom > 1800) { inkC = (inkC + 1) % INK_L.length; inkFrom = now; }
-    pts.push({x: e.clientX - r.left, y: e.clientY - r.top, t: now, c: inkC});
+    // colour only moves on while drawing: about one neighbour every 2.5s of movement
+    inkT += Math.min(now - inkLast, 50) / 2500; inkLast = now;
+    pts.push({x: e.clientX - r.left, y: e.clientY - r.top, t: now, c: inkT});
     if (!raf) raf = requestAnimationFrame(draw);
     const b = e.target.closest && e.target.closest('.sg');
     if (b) { const s2 = b.querySelector('.sg-s'); pill.textContent = s2 ? s2.textContent : ''; pill.classList.add('on'); pill.style.transform = `translate(${e.clientX + 18}px,${e.clientY + 14}px)`; }
