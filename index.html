@@ -1483,7 +1483,13 @@ function runIntro(){
     intro.classList.remove('leaving', 'tossing', 'ready');
     intro.querySelectorAll('.ifold .tool').forEach(el => { el.style.visibility = ''; el.style.transform = ''; el.style.opacity = ''; });
     intro.hidden = false;
-    if (!reduce) tossTools(intro); // with reduced motion the apps simply stay in the folder
+    // with reduced motion the apps simply stay in the folder. Otherwise wait until the pictures have loaded (max 4s),
+    // so on a first visit they really come out of the folder instead of popping in where they already landed
+    if (!reduce) {
+      const imgs = [...intro.querySelectorAll('.ifold .tool img')];
+      const ready = Promise.all(imgs.map(i => i.complete && i.naturalWidth ? 0 : (i.decode ? i.decode().catch(() => {}) : new Promise(r => { i.onload = i.onerror = r; }))));
+      Promise.race([ready, new Promise(r => setTimeout(r, 4000))]).then(() => { if (!done && !intro.hidden) tossTools(intro); });
+    }
     document.documentElement.style.overflow = 'hidden';
     if (window.__lenis) __lenis.stop();
     eyes.forEach(e => { if (!intro.contains(e)) e.classList.add('asleep'); });
