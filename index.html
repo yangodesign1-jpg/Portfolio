@@ -1230,17 +1230,18 @@ document.getElementById('copy').addEventListener('click', e => {
     if (cv.height !== Math.round(sec.clientHeight * dpr)) size();
     const now = performance.now(); pts = pts.filter(p => now - p.t < 520);
     ctx.clearRect(0, 0, cv.width, cv.height);
-    const col = getComputedStyle(sec).getPropertyValue('--ink-trail').trim() || '#000';
-    ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = col;
+    // the line changes colour as it is drawn: each point keeps the hue it was born with
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
     for (let k = 1; k < pts.length; k++) {
       const a = pts[k-1], b = pts[k], life = 1 - (now - b.t) / 520;
-      ctx.globalAlpha = Math.min(1, Math.max(0, life * 1.6)); ctx.lineWidth = (1.5 + 8 * life) * dpr;
+      ctx.globalAlpha = Math.min(1, Math.max(0, life * 1.6)); ctx.lineWidth = (1.5 + 8 * life) * dpr; ctx.strokeStyle = `hsl(${b.h} ${dark ? '85% 66%' : '80% 52%'})`;
       ctx.beginPath(); ctx.moveTo(a.x * dpr, a.y * dpr); ctx.lineTo(b.x * dpr, b.y * dpr); ctx.stroke();
     }
     raf = pts.length ? requestAnimationFrame(draw) : 0;
   };
   sec.addEventListener('pointermove', e => {
-    const r = sec.getBoundingClientRect(); pts.push({x: e.clientX - r.left, y: e.clientY - r.top, t: performance.now()});
+    const r = sec.getBoundingClientRect(); const now = performance.now(); pts.push({x: e.clientX - r.left, y: e.clientY - r.top, t: now, h: Math.round(now / 3) % 360});
     if (!raf) raf = requestAnimationFrame(draw);
     const b = e.target.closest && e.target.closest('.sg');
     if (b) { const s2 = b.querySelector('.sg-s'); pill.textContent = s2 ? s2.textContent : ''; pill.classList.add('on'); pill.style.transform = `translate(${e.clientX + 18}px,${e.clientY + 14}px)`; }
