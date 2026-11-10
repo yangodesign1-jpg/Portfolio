@@ -587,7 +587,7 @@ p{margin:0}
 .ifold .back{position:absolute;z-index:15;inset:12% 0 0;background:linear-gradient(#5B9DD2,#4C8CC3);border-radius:4% 4% 6% 6%/6% 6% 8% 8%}
 .ifold .back::after{content:"";position:absolute;left:3%;right:3%;top:5%;height:14%;background:linear-gradient(#FFFFFF,#E4E8EC);border-radius:3px}
 .ifold .back::before{content:"";position:absolute;left:0;top:-9%;width:36%;height:12%;background:#5B9DD2;border-radius:6px 6px 0 0;clip-path:polygon(0 0,86% 0,100% 100%,0 100%)}
-.ifold .tools{position:absolute;inset:0;pointer-events:none}
+.ifold .tools{position:absolute;inset:0;pointer-events:none;z-index:17} /* between the back+paper (15) and the front pocket (20): tools rise out of the folder */
 .ifold .tool{pointer-events:auto}
 #tip{opacity:0;transition:opacity .15s ease;z-index:3;font-size:15px;font-weight:500;color:#fff;background:rgba(58,58,60,.9);border:.5px solid rgba(255,255,255,.14);border-radius:999px;padding:7px 18px;box-shadow:0 4px 14px rgba(0,0,0,.35);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4)}
 #tip::after{content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:12px;background:inherit;border-right:.5px solid rgba(255,255,255,.14);border-bottom:.5px solid rgba(255,255,255,.14);border-radius:0 0 4px 0;transform:translateX(-50%) rotate(45deg);z-index:-1}
@@ -1449,7 +1449,9 @@ function tossTools(intro){
     const hx = x * R(.08, .3) * innerWidth / 100, hy = R(-30, -16) * innerHeight / 100, hs = +(z * R(.7, .95)).toFixed(2), hr = Math.round(R(-120, 120));
     // out of the folder with a hop; from there it drifts on its own
     const a = el.animate([
-      {transform:'translate(0,4vh) scale(.35) rotate(0deg)', opacity:0, easing:'cubic-bezier(.2,.7,.4,1)'},
+      {transform:'translate(0,-50%) scale(.3) rotate(0deg)', opacity:0, easing:'cubic-bezier(.2,.7,.4,1)'},
+      {opacity:op, offset:.12}, // appears while still hidden in the folder pocket, then rises out between the paper and the front
+
       {transform:`translate(${hx}px,${hy}px) scale(${hs}) rotate(${hr}deg)`, opacity:op}
     ], {duration:R(650, 950), delay:t, fill:'both'});
     a.onfinish = () => { if (intro.classList.contains('tossing')) driftAdd(el, hx, hy, hs, hr, z, op); };
