@@ -74,7 +74,7 @@ p{margin:0}
 .bar.at-top{background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom-color:transparent}
 :root .bar.at-top{color:#1E1C1A}
 :root .hero{--field:#F4F3F1;color:#1E1C1A}
-:root[data-theme="dark"] .bar.at-top{color:#F1EFEC;background:linear-gradient(180deg,rgba(12,10,9,.42),rgba(12,10,9,0))} /* dark: a shade behind the menu only, so the links read on the light video */
+:root[data-theme="dark"] .bar.at-top{color:#F1EFEC} /* nothing behind the menu over the video: the bar background shows only after scrolling past it (user 2026-11-16) */
 :root[data-theme="dark"] .hero{--field:#171513;color:#F1EFEC}
 :root[data-theme="dark"] .hero .reel::after{background:radial-gradient(ellipse 75% 75% at 50% 50%,rgba(23,21,19,0) 30%,rgba(23,21,19,.6) 100%)}
 :root[data-theme="dark"] .hero .eye .lid-u,:root[data-theme="dark"] .hero .eye .lid-l{fill:var(--field)}
