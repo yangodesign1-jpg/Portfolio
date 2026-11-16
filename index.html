@@ -236,16 +236,19 @@ p{margin:0}
 @media (max-width:767px){.sc-land{top:14%}} /* phone: the field starts lower, so there is room for sky and clouds */
 .sc-front{position:absolute;left:0;right:0;bottom:0;height:100%;transform-origin:50% 100%;transform:scale(1.1);pointer-events:none;z-index:3;overflow:hidden}
 /* front grass: her own day/night pictures on black, made see-through (user 2026-11-16); grows faster than the field on scroll for depth */
-/* smaller blades (user 2026-11-16): two copies side by side, the second mirrored so there is no seam */
-.sc-front .fr{position:absolute;left:-10%;width:120%;bottom:0;display:flex}
+/* smaller blades (user 2026-11-16): two copies side by side */
+.sc-front .fr{position:absolute;left:-31%;width:136%;bottom:0;display:flex;align-items:flex-end}
 .sc-front .fr img{display:block;width:50%;max-width:none;height:auto}
-.sc-front .fr img+img{transform:scaleX(-1)}
+.sc-front .fr img+img{margin-left:-14%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24%);mask-image:linear-gradient(90deg,transparent 0,#000 24%)} /* the second copy overlaps and fades in: no mirror, no seam (user 2026-11-16) */
 .sc-front .fr.th-l{transform:translateY(38%)}
 .sc-front .fr.th-d{transform:translateY(22%)}
 :root[data-theme="dark"] .sc-front .fr.th-d{display:flex!important}
-@media (max-width:767px){.sc-front .fr{width:180%;left:-40%}}
+@media (max-width:767px){.sc-front .fr{width:200%;left:-62%}}
 .monitor{position:absolute;left:calc(50% - var(--M) * 1.2265 / 2);top:calc(64px + (100% - 64px - var(--M)) / 2);width:calc(var(--M) * 1.2265);aspect-ratio:1538/1254;transform-origin:50% 42.7%} /* widened so the screen has the wallpaper's proportions (user 2026-11-16); --M is its height */
 .monitor__frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+/* soft shadow on the grass under the stand (user 2026-11-16): a tight contact shadow plus a wide soft one */
+.monitor::after{content:"";position:absolute;left:6%;width:88%;top:92%;height:13%;pointer-events:none;background:radial-gradient(closest-side,rgba(8,22,4,.75),rgba(8,22,4,.45) 50%,rgba(8,22,4,0))}
+:root[data-theme="dark"] .monitor::after{background:radial-gradient(closest-side,rgba(0,4,8,.75),rgba(0,4,8,.4) 55%,rgba(0,4,8,0))}
 .monitor::before{content:"";position:absolute;left:9.6%;top:14.2%;width:80.8%;height:57%;border-radius:6%/8%;background:#1d3f86 url(scene/wallpaper-2.webp) 50% 50%/cover;filter:brightness(.55)} /* behind the see-through rim around the screen (user 2026-11-16: lighter shadow) */
 .monitor__display{position:absolute;left:10.9%;top:15.5%;width:78.2%;height:54.3%;overflow:hidden;border-radius:5%/7%;z-index:1;background:#3E7FD8 url(scene/wallpaper-2.webp) 50% 50%/cover;container-type:inline-size} /* her wallpaper (2026-11-16), fills the whole screen */
 .desk{position:absolute;inset:0;display:grid;align-items:start;justify-items:center;padding:5cqw 4cqw 6cqw} /* folders sit in the upper part of the screen (user 2026-11-16) */
@@ -710,7 +713,6 @@ From the first idea to the real thing.</p>
     <div class="acts"><a class="act-2" id="wa" href="#contact" data-t="heroAct2">Get in touch</a><a class="act" href="#work" data-t="heroAct">See my work</a></div>
   </div>
 
-<div class="draft wrap" role="note" data-t="draft">Working draft: the categories, projects and text here are examples until the work is sorted.</div>
 
 <section class="drawer" id="work" aria-labelledby="work-h">
   <h2 class="vh" id="work-h" data-t="workH">The drawer</h2>
