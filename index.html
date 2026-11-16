@@ -1,20 +1,4 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
-/* folders as colour pockets with the work peeking out of the top (user's reference, 2026-11-16) */
-.pk{position:relative;display:block;width:min(100%,20cqw);aspect-ratio:20/19}
-.pk-back{position:absolute;left:0;right:0;bottom:0;height:64%;background:var(--fb);border-radius:1.2cqw 1.6cqw 1.6cqw 1.6cqw}
-.pk-back::before{content:"";position:absolute;left:0;top:-1.5cqw;width:44%;height:2.4cqw;background:var(--fb);border-radius:1cqw 1cqw 0 0}
-.pk-cards{position:absolute;left:8%;right:8%;top:0;bottom:34%}
-.pk-cards img{position:absolute;bottom:0;width:50%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:.45cqw;box-shadow:0 .3cqw .9cqw rgba(0,0,0,.28);transition:transform .35s var(--ease)}
-.pk-cards img:nth-child(1){left:0;transform:rotate(-9deg);transform-origin:50% 100%}
-.pk-cards img:nth-child(2){left:24%;z-index:2;transform:translateY(-6%) rotate(2deg);transform-origin:50% 100%}
-.pk-cards img:nth-child(3){right:0;transform:rotate(10deg);transform-origin:50% 100%}
-.mfold:hover .pk-cards img:nth-child(1),.mfold:focus-visible .pk-cards img:nth-child(1){transform:translateY(-14%) rotate(-14deg)}
-.mfold:hover .pk-cards img:nth-child(2),.mfold:focus-visible .pk-cards img:nth-child(2){transform:translateY(-22%) rotate(1deg)}
-.mfold:hover .pk-cards img:nth-child(3),.mfold:focus-visible .pk-cards img:nth-child(3){transform:translateY(-14%) rotate(15deg)}
-.pk-front{position:absolute;left:0;right:0;bottom:0;height:54%;z-index:3;background:var(--ff);border-radius:1.6cqw;box-shadow:0 .5cqw 1.4cqw rgba(10,40,90,.28),inset 0 .25cqw 0 rgba(255,255,255,.35)}
-.mfold .mf-lead{display:none}
-@media (prefers-reduced-motion:reduce){.pk-cards img{transition:none}}
-@media (max-width:767px){.pk{width:min(100%,24cqw)}}
 </style></head><body>
 <script>try{var t=localStorage.getItem("io-theme");if(t!=="dark"&&t!=="light")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){}</script>
 <title>Inbal Oz</title>
@@ -251,6 +235,7 @@ p{margin:0}
 @media (max-width:767px){.sc-front{height:17svh;transform:scale(1.1)}}
 .monitor{position:absolute;left:calc(50% - var(--M) * 1.2265 / 2);top:calc(64px + (100% - 64px - var(--M)) / 2);width:calc(var(--M) * 1.2265);aspect-ratio:1538/1254;transform-origin:50% 42.7%} /* widened so the screen has the wallpaper's proportions (user 2026-11-16); --M is its height */
 .monitor__frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.monitor::before{content:"";position:absolute;left:9.6%;top:14.2%;width:80.8%;height:57%;border-radius:6%/8%;background:#1d3f86 url(scene/wallpaper-2.webp) 50% 50%/cover;filter:brightness(.55)} /* behind the see-through rim around the screen (user 2026-11-16: lighter shadow) */
 .monitor__display{position:absolute;left:10.9%;top:15.5%;width:78.2%;height:54.3%;overflow:hidden;border-radius:5%/7%;z-index:1;background:#3E7FD8 url(scene/wallpaper-2.webp) 50% 50%/cover;container-type:inline-size} /* her wallpaper (2026-11-16), fills the whole screen */
 .desk{position:absolute;inset:0;display:grid;align-items:start;justify-items:center;padding:5cqw 4cqw 6cqw} /* folders sit in the upper part of the screen (user 2026-11-16) */
 /* a dock along the bottom of the computer's screen, her own Mac dock; frosted glass so the wallpaper shows through */
@@ -667,6 +652,22 @@ p{margin:0}
   .rise{animation:none}
   *,*::before,*::after{transition-duration:.01ms!important}
 }
+
+/* the work folders: real folders first (back with a tab, front pocket), with two works just peeking out (user's reference, 2026-11-16) */
+.pk{position:relative;display:block;width:min(100%,18cqw);aspect-ratio:18/14}
+.pk-back{position:absolute;left:0;right:0;bottom:0;height:84%;background:var(--fb);border-radius:0 1.4cqw 1.4cqw 1.4cqw;box-shadow:0 .4cqw 1.2cqw rgba(10,40,90,.25)}
+.pk-back::before{content:"";position:absolute;left:0;bottom:100%;width:42%;height:2.2cqw;background:var(--fb);border-radius:1cqw 1.4cqw 0 0}
+.pk-cards{position:absolute;left:14%;right:14%;top:22%;bottom:30%}
+.pk-cards img{position:absolute;bottom:0;width:46%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:.35cqw;box-shadow:0 .2cqw .6cqw rgba(0,0,0,.22);transform-origin:50% 100%;transition:transform .35s var(--ease)}
+.pk-cards img:nth-child(1){left:4%;transform:rotate(-6deg)}
+.pk-cards img:nth-child(2){right:4%;transform:rotate(5deg)}
+.pk-cards img:nth-child(3){display:none}
+.mfold:hover .pk-cards img:nth-child(1),.mfold:focus-visible .pk-cards img:nth-child(1){transform:translateY(-18%) rotate(-9deg)}
+.mfold:hover .pk-cards img:nth-child(2),.mfold:focus-visible .pk-cards img:nth-child(2){transform:translateY(-24%) rotate(8deg)}
+.pk-front{position:absolute;left:0;right:0;bottom:0;height:66%;z-index:3;background:var(--ff);border-radius:1.4cqw;box-shadow:0 -.2cqw .8cqw rgba(0,0,0,.12),inset 0 .2cqw 0 rgba(255,255,255,.4)}
+.mfold .mf-lead{display:none}
+@media (prefers-reduced-motion:reduce){.pk-cards img{transition:none}}
+@media (max-width:767px){.pk{width:min(100%,22cqw)}}
 </style>
 
 <div id="site" dir="ltr" lang="en">
