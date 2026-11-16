@@ -259,9 +259,13 @@ p{margin:0}
 @media (max-width:767px){.js-scene .scene{height:260svh}}
 /* the folders on the screen: real buttons, a yellow folder with its name under it; sizes follow the screen (cqw) */
 .folders{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1cqw;width:100%;max-width:50cqw}
-.mfold{display:flex;flex-direction:column;align-items:center;gap:.8cqw;min-height:44px;padding:1.4cqw .8cqw;border-radius:1.6cqw;text-align:center;color:#fff;transition:background .2s}
-.mfold:hover{background:rgba(255,255,255,.18)}
-.mfold:focus-visible{outline:3px solid #fff;outline-offset:-3px;box-shadow:inset 0 0 0 6px #164ACA}
+.mfold{display:flex;flex-direction:column;align-items:center;gap:.5cqw;min-height:44px;padding:.6cqw .4cqw;text-align:center;color:#fff;outline:none}
+/* selected look like macOS Finder (user screenshot 2026-11-16): grey rounded box behind the icon, blue pill on the name */
+.mf-hl{display:block;padding:.9cqw 1.1cqw;border-radius:1.1cqw;transition:background .15s}
+.mfold:hover .mf-hl,.mfold:focus-visible .mf-hl,.mfold.sel .mf-hl{background:rgba(70,66,62,.55)}
+.mfold .mf-name{padding:.15em .5em;border-radius:.45em;transition:background .15s}
+.mfold:hover .mf-name,.mfold:focus-visible .mf-name,.mfold.sel .mf-name{background:#2A5BD7;text-shadow:none}
+.mfold:focus-visible .mf-hl{box-shadow:0 0 0 2px #fff}
 .mf-ico{width:min(100%,11cqw);height:auto;filter:drop-shadow(0 .6cqw .9cqw rgba(10,40,90,.3))} /* about the size of a real desktop icon (user, 2026-10-25) */
 .mf-name{font-size:clamp(10px,1.7cqw,13px);font-weight:600;letter-spacing:calc(-.01em + var(--lsx));line-height:1.2;text-shadow:0 1px 1px rgba(0,0,0,.85),0 1px 3px rgba(0,0,0,.6),0 2px 10px rgba(0,25,70,.55)} /* readable on the white clouds too (audit 2026-11-16) */
 .mf-count{font-size:clamp(9px,1.7cqw,12px);font-weight:500;text-shadow:0 1px 1px rgba(0,0,0,.85),0 1px 3px rgba(0,0,0,.6),0 2px 8px rgba(0,25,70,.55)}
@@ -654,20 +658,22 @@ p{margin:0}
 }
 
 /* the work folders: real folders first (back with a tab, front pocket), with two works just peeking out (user's reference, 2026-11-16) */
-.pk{position:relative;display:block;width:min(100%,7.5cqw);aspect-ratio:18/14}
-.pk-back{position:absolute;left:0;right:0;bottom:0;height:84%;background:var(--fb);border-radius:0 1.4cqw 1.4cqw 1.4cqw;box-shadow:0 .4cqw 1.2cqw rgba(10,40,90,.25)}
-.pk-back::before{content:"";position:absolute;left:0;bottom:100%;width:42%;height:2.2cqw;background:var(--fb);border-radius:1cqw 1.4cqw 0 0}
-.pk-cards{position:absolute;left:14%;right:14%;top:22%;bottom:30%}
+.pk{position:relative;display:block;width:7.5cqw;aspect-ratio:18/14}
+/* macOS Finder blue folder (user screenshot 2026-11-16) */
+.pk-back{position:absolute;left:0;right:0;bottom:0;height:84%;background:linear-gradient(180deg,#5AAEE6,#4E9FD9);border-radius:0 .9cqw .9cqw .9cqw;box-shadow:0 .3cqw .8cqw rgba(0,20,60,.3)}
+.pk-back::before{content:"";position:absolute;left:0;bottom:calc(100% - 1px);width:40%;height:1.3cqw;background:#5AAEE6;border-radius:.7cqw 1.1cqw 0 0}
+.pk-paper{position:absolute;left:4%;right:4%;top:22%;height:40%;background:#fff;border-radius:.5cqw;box-shadow:0 -.1cqw .2cqw rgba(0,0,0,.08)}
+.pk-cards{position:absolute;left:14%;right:14%;top:18%;bottom:30%;z-index:2}
 .pk-cards img{position:absolute;bottom:0;width:46%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:.35cqw;box-shadow:0 .2cqw .6cqw rgba(0,0,0,.22);transform-origin:50% 100%;transition:transform .35s var(--ease)}
 .pk-cards img:nth-child(1){left:4%;transform:rotate(-6deg)}
 .pk-cards img:nth-child(2){right:4%;transform:rotate(5deg)}
 .pk-cards img:nth-child(3){display:none}
 .mfold:hover .pk-cards img:nth-child(1),.mfold:focus-visible .pk-cards img:nth-child(1){transform:translateY(-18%) rotate(-9deg)}
 .mfold:hover .pk-cards img:nth-child(2),.mfold:focus-visible .pk-cards img:nth-child(2){transform:translateY(-24%) rotate(8deg)}
-.pk-front{position:absolute;left:0;right:0;bottom:0;height:66%;z-index:3;background:var(--ff);border-radius:1.4cqw;box-shadow:0 -.2cqw .8cqw rgba(0,0,0,.12),inset 0 .2cqw 0 rgba(255,255,255,.4)}
+.pk-front{position:absolute;left:0;right:0;bottom:0;height:66%;z-index:3;background:linear-gradient(180deg,#93D1F7 0%,#7EC4F1 55%,#6DB8EB 100%);border-radius:.9cqw;box-shadow:0 -.15cqw .5cqw rgba(0,30,80,.18),inset 0 .15cqw 0 rgba(255,255,255,.55),inset 0 -.15cqw 0 rgba(30,90,160,.35)}
 .mfold .mf-lead{display:none}
 @media (prefers-reduced-motion:reduce){.pk-cards img{transition:none}}
-@media (max-width:767px){.pk{width:min(100%,11cqw)}} /* about the size of a real Mac desktop folder (user 2026-11-16) */
+@media (max-width:767px){.pk{width:11cqw}} /* about the size of a real Mac desktop folder (user 2026-11-16) */
 </style>
 
 <div id="site" dir="ltr" lang="en">
@@ -896,7 +902,7 @@ function renderFolders(){
   const L = lang;
   foldersEl.innerHTML = FOLDERS.map((f, fi) => `
     <button type="button" class="mfold" data-fold="${fi}" aria-haspopup="dialog">
-      <span class="pk" style="--fb:${PK[fi].b};--ff:${PK[fi].f}" aria-hidden="true"><span class="pk-back"></span><span class="pk-cards">${PK[fi].img.map(n => `<img src="works/peek/${n}.webp" alt="" loading="lazy" decoding="async">`).join('')}</span><span class="pk-front"></span></span>
+      <span class="mf-hl" aria-hidden="true"><span class="pk"><span class="pk-back"></span><span class="pk-paper"></span><span class="pk-cards">${PK[fi].img.map(n => `<img src="works/peek/${n}.webp" alt="" loading="lazy" decoding="async">`).join('')}</span><span class="pk-front"></span></span></span>
       <span class="mf-name">${esc(f[L].n)}</span>
       <span class="mf-lead">${esc(f[L].lead)}</span>
     </button>`).join('');
