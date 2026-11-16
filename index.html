@@ -258,14 +258,14 @@ p{margin:0}
 .js-scene .stage{position:sticky;top:0}
 @media (max-width:767px){.js-scene .scene{height:260svh}}
 /* the folders on the screen: real buttons, a yellow folder with its name under it; sizes follow the screen (cqw) */
-.folders{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3cqw;width:100%;max-width:74cqw}
+.folders{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2.4cqw;width:100%;max-width:86cqw}
 .mfold{display:flex;flex-direction:column;align-items:center;gap:.8cqw;min-height:44px;padding:1.4cqw .8cqw;border-radius:1.6cqw;text-align:center;color:#fff;transition:background .2s}
 .mfold:hover{background:rgba(255,255,255,.18)}
 .mfold:focus-visible{outline:3px solid #fff;outline-offset:-3px;box-shadow:inset 0 0 0 6px #164ACA}
 .mf-ico{width:min(100%,11cqw);height:auto;filter:drop-shadow(0 .6cqw .9cqw rgba(10,40,90,.3))} /* about the size of a real desktop icon (user, 2026-10-25) */
 .mf-name{font-size:clamp(11px,2.3cqw,16px);font-weight:600;letter-spacing:calc(-.01em + var(--lsx));line-height:1.2;text-shadow:0 1px 1px rgba(0,0,0,.85),0 1px 3px rgba(0,0,0,.6),0 2px 10px rgba(0,25,70,.55)} /* readable on the white clouds too (audit 2026-11-16) */
 .mf-count{font-size:clamp(9px,1.7cqw,12px);font-weight:500;text-shadow:0 1px 1px rgba(0,0,0,.85),0 1px 3px rgba(0,0,0,.6),0 2px 8px rgba(0,25,70,.55)}
-@media (max-width:767px){.folders{max-width:92cqw}.mf-name{font-size:13px;white-space:nowrap}.mf-count{font-size:11px}} /* phone: big enough to read, the name stays on one line */
+@media (max-width:767px){.folders{max-width:96cqw;gap:1.6cqw}.mf-name{font-size:12px;white-space:normal;text-wrap:balance}.mf-count{font-size:11px}} /* phone: big enough to read, the name stays on one line */
 .mf-lead{display:none}
 .fwin-back{position:fixed;inset:0;z-index:60;background:rgba(20,18,16,.38);display:grid;place-items:center;padding:calc(env(safe-area-inset-top,0px) + 70px) 16px 24px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .fwin-back[hidden]{display:none}
@@ -855,31 +855,36 @@ const T = {
 };
 
 /* Example content until the real work is sorted into folders. */
-const FOLDERS = [
-  {c:'--f1', he:{n:'לעסקים',lead:'זהות, אריזה וחומרים שמוכרים. כל מה שעסק צריך כדי להיראות כמו שהוא רוצה.'}, en:{n:'For businesses',lead:'Identity, packaging and the material that sells. Whatever a business needs to look the way it wants to.'},
+const FOLDERS = [ // the four subjects agreed with the user, 2026-11-16: sorted by where the work ends up. NO animation and NO logos (user). Items are her real works; texts are drafts.
+  {c:'--f2', he:{n:'דפוס ונייר',lead:'כריכות, הזמנות, תפריטים ופוסטרים. כל מה שמחזיקים ביד.'}, en:{n:'Print & paper',lead:'Covers, invitations, menus and posters. Everything you hold in your hand.'},
     items:[
-      {y:'2026',he:{t:'מאפייה שכונתית',d:'זהות, שלט ושקיות לחם לעסק משפחתי.',k:'זהות מלאה'},en:{t:'Neighbourhood bakery',d:'Identity, sign and bread bags for a family business.',k:'Full identity'}},
-      {y:'2025',he:{t:'סטודיו ליוגה',d:'סימן, מערכת צבעים ולוח שיעורים מודפס.',k:'לוגו ומערכת'},en:{t:'Yoga studio',d:'Mark, colour system and a printed class timetable.',k:'Logo and system'}},
-      {y:'2024',he:{t:'יקב בוטיק',d:'שם, לוגו ותוויות לשלוש סדרות.',k:'שם ולוגו'},en:{t:'Boutique winery',d:'Name, logo and labels for three ranges.',k:'Naming and logo'}},
-      {y:'2026',he:{t:'סדרת תה',d:'שש קופסאות, איור לכל טעם.',k:'אריזה'},en:{t:'Tea range',d:'Six boxes, one drawing per blend.',k:'Packaging'}},
-      {y:'2025',he:{t:'ספר מתכונים משפחתי',d:'עימוד, כריכה וצילום מנות.',k:'ספר'},en:{t:'Family cookbook',d:'Layout, cover and food photography.',k:'Book'}}]},
-  {c:'--f3', he:{n:'לזוגות',lead:'הזמנות וסטים שלמים לחתונה, כל אחד מעוצב לזוג אחד.'}, en:{n:'For couples',lead:'Invitations and whole wedding suites, each made for one couple.'},
+      {y:'',he:{t:'חמניות',d:'כריכה ואיור לספר.',k:'כריכת ספר'},en:{t:'Sunflowers',d:'Cover and illustration for a book.',k:'Book cover'}},
+      {y:'2025',he:{t:'קורל וברק',d:'הזמנה מאוירת, תפריט, חותמות שעווה ושלט זכוכית.',k:'סט חתונה'},en:{t:'Koral & Barak',d:'Illustrated invitation, menu, wax seals and a glass sign.',k:'Wedding suite'}},
+      {y:'2018',he:{t:'ירדן ושחף',d:'הזמנה בצבעי מים עם דיוקנאות של הזוג.',k:'הזמנת חתונה'},en:{t:'Yarden & Shahaf',d:'A watercolour invitation with portraits of the couple.',k:'Wedding invitation'}},
+      {y:'',he:{t:'הזמנה לתערוכה',d:'הזמנה ופוסטר לתערוכה.',k:'פוסטר'},en:{t:'Exhibition invitation',d:'Invitation and poster for an exhibition.',k:'Poster'}}]},
+  {c:'--f3', he:{n:'חללים ועטיפות',lead:'עבודות גדולות שעומדות בעולם: עטיפות, קירות ושילוט.'}, en:{n:'Spaces & wraps',lead:'Big work that stands in the world: wraps, walls and signs.'},
     items:[
-      {y:'2026',he:{t:'חתונה בפרדס',d:'הזמנה בהדפסת רשת, תפריט וכרטיסי ישיבה.',k:'סט מלא'},en:{t:'Orchard wedding',d:'Screen-printed invitation, menu and place cards.',k:'Full suite'}},
-      {y:'2025',he:{t:'חתונה על החוף',d:'הזמנה מתקפלת ומפה מאוירת לאורחים.',k:'הזמנה ומפה'},en:{t:'Beach wedding',d:'Folding invitation and an illustrated guest map.',k:'Invitation and map'}},
-      {y:'2024',he:{t:'חינה',d:'איור ידני וטיפוגרפיה בעברית ובערבית.',k:'הזמנה'},en:{t:'Henna night',d:'Hand drawing with Hebrew and Arabic type.',k:'Invitation'}}]},
-  {c:'--f4', he:{n:'סטודיו',lead:'איור, אנימציה וציורי קיר. הצד שבו אני מציירת בלי לקוח.'}, en:{n:'Studio',lead:'Illustration, animation and murals. The side where I draw without a client.'},
+      {y:'',he:{t:'עטיפה למכונית',d:'מדבקה מעוצבת לכל הרכב.',k:'עטיפת רכב'},en:{t:'Car wrap',d:'A designed wrap for the whole car.',k:'Vehicle wrap'}},
+      {y:'',he:{t:'קיר מעוצב',d:'קיר עם צורות קאפה בתלת מימד.',k:'קיר'},en:{t:'Designed wall',d:'A wall built with 3D foam-board shapes.',k:'Wall'}},
+      {y:'',he:{t:'קמפיין חוצות',d:'תחנות אוטובוס ושלטי חוצות.',k:'שילוט'},en:{t:'Outdoor campaign',d:'Bus stops and billboards.',k:'Signage'}}]},
+  {c:'--f4', he:{n:'אמנות ואיור',lead:'קנבסים, איור דיגיטלי ורישום. הצד שבו אני מציירת בשביל עצמי.'}, en:{n:'Art & illustration',lead:'Canvases, digital art and drawing. The side where I draw for myself.'},
     items:[
-      {y:'2025',he:{t:'ציור קיר בקפה',d:'שישה מטרים של עלים, כוסות ואנשים.',k:'ציור קיר'},en:{t:'Café mural',d:'Six metres of leaves, cups and people.',k:'Mural'}},
-      {y:'2024',he:{t:'ספר ילדים',d:'עשרים איורים לספר על חתול שמחפש בית.',k:'ספר ילדים'},en:{t:'Picture book',d:'Twenty drawings for a book about a cat looking for home.',k:'Picture book'}}]}
+      {y:'',he:{t:'אישה ופרפרים',d:'ציור על קנבס עגול.',k:'קנבס'},en:{t:'Woman and butterflies',d:'Painting on a round canvas.',k:'Canvas'}},
+      {y:'',he:{t:'רישומי דמות',d:'דיו ומכחול.',k:'רישום'},en:{t:'Figure drawings',d:'Ink and brush.',k:'Drawing'}},
+      {y:'',he:{t:'מחברת סקיצות',d:'צ\'אקרות, בתי קפה ומה שראיתי.',k:'סקיצות'},en:{t:'Sketchbook',d:'Chakras, cafés and whatever I saw.',k:'Sketches'}},
+      {y:'',he:{t:'איור דיגיטלי',d:'איורים שנעשו באייפד.',k:'דיגיטלי'},en:{t:'Digital illustration',d:'Drawings made on the iPad.',k:'Digital'}}]},
+  {c:'--f1', he:{n:'טיפוגרפיה',lead:'עיצוב גרפי שמתחיל באותיות.'}, en:{n:'Typography',lead:'Graphic design that starts with letters.'},
+    items:[
+      {y:'',he:{t:'טיפוגרפיה',d:'עבודות אותיות.',k:'טיפוגרפיה'},en:{t:'Typography',d:'Lettering and type work.',k:'Typography'}}]}
 ];
 
 /* ---------------- render folders ---------------- */
 // each folder's pocket colours (back, front) and the works peeking out of it
 const PK = [
-  {b:'#F4A7B9', f:'#FFD5DF', img:['biz-1','biz-2','biz-3']},
-  {b:'#5E8F7C', f:'#87B09F', img:['cpl-1','cpl-2','cpl-3']},
-  {b:'#F0922E', f:'#F8CC92', img:['std-1','std-2','std-3']}
+  {b:'#F4A7B9', f:'#FFD5DF', img:['biz-1','cpl-1']},
+  {b:'#5E8F7C', f:'#87B09F', img:[]},
+  {b:'#F0922E', f:'#F8CC92', img:['std-2','std-1']},
+  {b:'#5DB3DD', f:'#B4E2F6', img:[]}
 ];
 const foldersEl = document.getElementById('folders');
 const esc = s => String(s).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
