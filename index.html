@@ -125,6 +125,7 @@ p{margin:0}
 .eye .glint{fill:#fff}
 .eye .lid-u,.eye .lid-l{fill:var(--field,var(--coal));transition:transform .26s cubic-bezier(.25,.8,.35,1)}
 .eye{pointer-events:auto}
+.hero .name .fit{pointer-events:none} /* the big letters overhang the strip below; let clicks reach See my work (the eye keeps its own clicks) */
 /* squint while the pointer rests on the eye */
 .eye.squint .lid-u{transform:translateY(-24px);transition:transform .32s cubic-bezier(.3,.7,.3,1)}
 .eye.squint .lid-l{transform:translateY(20px);transition:transform .32s cubic-bezier(.3,.7,.3,1)}
@@ -1356,6 +1357,12 @@ if (!reduce) {
     scrollTo({top:scrollY + scene.getBoundingClientRect().bottom - sc.H, behavior:'auto'});
     document.getElementById('desk-at').focus({preventScroll:true});
   });
+  // "Work" in the menus and "See my work" land on the big computer with its folders, not on the small one in the field (user 2026-11-16)
+  document.querySelectorAll('a[href="#work"]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    scrollTo({top:scrollY + scene.getBoundingClientRect().bottom - sc.H, behavior:'smooth'});
+    document.getElementById('desk-at').focus({preventScroll:true});
+  }));
 }
 
 /* 2. (film grain removed, user 2026-10-24) */
