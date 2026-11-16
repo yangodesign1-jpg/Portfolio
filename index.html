@@ -1,4 +1,21 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+/* folders as colour pockets with the work peeking out of the top (user's reference, 2026-11-16) */
+.pk{position:relative;display:block;width:min(100%,20cqw);aspect-ratio:20/19}
+.pk-back{position:absolute;left:0;right:0;bottom:0;height:64%;background:var(--fb);border-radius:1.2cqw 1.6cqw 1.6cqw 1.6cqw}
+.pk-back::before{content:"";position:absolute;left:0;top:-1.5cqw;width:44%;height:2.4cqw;background:var(--fb);border-radius:1cqw 1cqw 0 0}
+.pk-cards{position:absolute;left:8%;right:8%;top:0;bottom:34%}
+.pk-cards img{position:absolute;bottom:0;width:50%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:.45cqw;box-shadow:0 .3cqw .9cqw rgba(0,0,0,.28);transition:transform .35s var(--ease)}
+.pk-cards img:nth-child(1){left:0;transform:rotate(-9deg);transform-origin:50% 100%}
+.pk-cards img:nth-child(2){left:24%;z-index:2;transform:translateY(-6%) rotate(2deg);transform-origin:50% 100%}
+.pk-cards img:nth-child(3){right:0;transform:rotate(10deg);transform-origin:50% 100%}
+.mfold:hover .pk-cards img:nth-child(1),.mfold:focus-visible .pk-cards img:nth-child(1){transform:translateY(-14%) rotate(-14deg)}
+.mfold:hover .pk-cards img:nth-child(2),.mfold:focus-visible .pk-cards img:nth-child(2){transform:translateY(-22%) rotate(1deg)}
+.mfold:hover .pk-cards img:nth-child(3),.mfold:focus-visible .pk-cards img:nth-child(3){transform:translateY(-14%) rotate(15deg)}
+.pk-front{position:absolute;left:0;right:0;bottom:0;height:54%;z-index:3;background:var(--ff);border-radius:1.6cqw;box-shadow:0 .5cqw 1.4cqw rgba(10,40,90,.28),inset 0 .25cqw 0 rgba(255,255,255,.35)}
+.mfold .mf-lead{display:none}
+@media (prefers-reduced-motion:reduce){.pk-cards img{transition:none}}
+@media (max-width:767px){.pk{width:min(100%,24cqw)}}
+</style></head><body>
 <script>try{var t=localStorage.getItem("io-theme");if(t!=="dark"&&t!=="light")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){}</script>
 <title>Inbal Oz</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -234,8 +251,8 @@ p{margin:0}
 @media (max-width:767px){.sc-front{height:17svh;transform:scale(1.1)}}
 .monitor{position:absolute;left:calc(50% - var(--M) * 1.2265 / 2);top:calc(64px + (100% - 64px - var(--M)) / 2);width:calc(var(--M) * 1.2265);aspect-ratio:1538/1254;transform-origin:50% 42.7%} /* widened so the screen has the wallpaper's proportions (user 2026-11-16); --M is its height */
 .monitor__frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
-.monitor__display{position:absolute;left:11.25%;top:16.2%;width:77.5%;height:53%;overflow:hidden;border-radius:5%/7%;z-index:1;background:#3E7FD8 url(scene/wallpaper-2.webp) 50% 50%/100% 100%;container-type:inline-size} /* her wallpaper (2026-11-16), fills the whole screen */
-.desk{position:absolute;inset:0;display:grid;place-items:center;padding:6cqw 4cqw}
+.monitor__display{position:absolute;left:10.9%;top:15.5%;width:78.2%;height:54.3%;overflow:hidden;border-radius:5%/7%;z-index:1;background:#3E7FD8 url(scene/wallpaper-2.webp) 50% 50%/cover;container-type:inline-size} /* her wallpaper (2026-11-16), fills the whole screen */
+.desk{position:absolute;inset:0;display:grid;align-items:start;justify-items:center;padding:5cqw 4cqw 6cqw} /* folders sit in the upper part of the screen (user 2026-11-16) */
 /* a dock along the bottom of the computer's screen, her own Mac dock; frosted glass so the wallpaper shows through */
 .mdock{position:absolute;z-index:2;left:50%;bottom:1.2cqw;transform:translateX(-50%);display:flex;align-items:flex-end;gap:.28cqw;padding:.45cqw .55cqw;border-radius:1.3cqw;background:rgba(255,255,255,.2);-webkit-backdrop-filter:blur(12px) saturate(1.7);backdrop-filter:blur(12px) saturate(1.7);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.45),0 .8cqw 2.4cqw rgba(0,25,70,.22)}
 :root[data-theme="dark"] .mdock{background:rgba(18,22,40,.28);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.18),0 .8cqw 2.4cqw rgba(0,0,0,.35)}
@@ -256,7 +273,7 @@ p{margin:0}
 .js-scene .stage{position:sticky;top:0}
 @media (max-width:767px){.js-scene .scene{height:260svh}}
 /* the folders on the screen: real buttons, a yellow folder with its name under it; sizes follow the screen (cqw) */
-.folders{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1cqw;width:100%;max-width:62cqw}
+.folders{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3cqw;width:100%;max-width:74cqw}
 .mfold{display:flex;flex-direction:column;align-items:center;gap:.8cqw;min-height:44px;padding:1.4cqw .8cqw;border-radius:1.6cqw;text-align:center;color:#fff;transition:background .2s}
 .mfold:hover{background:rgba(255,255,255,.18)}
 .mfold:focus-visible{outline:3px solid #fff;outline-offset:-3px;box-shadow:inset 0 0 0 6px #164ACA}
@@ -857,6 +874,12 @@ const FOLDERS = [
 ];
 
 /* ---------------- render folders ---------------- */
+// each folder's pocket colours (back, front) and the works peeking out of it
+const PK = [
+  {b:'#F4A7B9', f:'#FFD5DF', img:['biz-1','biz-2','biz-3']},
+  {b:'#5E8F7C', f:'#87B09F', img:['cpl-1','cpl-2','cpl-3']},
+  {b:'#F0922E', f:'#F8CC92', img:['std-1','std-2','std-3']}
+];
 const foldersEl = document.getElementById('folders');
 const esc = s => String(s).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
 function coverHTML(f, it, size){
@@ -867,7 +890,7 @@ function renderFolders(){
   const L = lang;
   foldersEl.innerHTML = FOLDERS.map((f, fi) => `
     <button type="button" class="mfold" data-fold="${fi}" aria-haspopup="dialog">
-      <svg class="mf-ico" viewBox="0 0 100 80" aria-hidden="true"><defs><linearGradient id="mfg${fi}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7EBCE9"/><stop offset="1" stop-color="#5B9BD2"/></linearGradient></defs><path d="M4 14q0-6 6-6h22q3 0 5 2l4 4h49q6 0 6 6v50q0 6-6 6H10q-6 0-6-6Z" fill="#5B9DD2"/><rect x="8" y="19" width="84" height="10" rx="2" fill="#fff"/><path d="M4 30q0-5 5-5h82q5 0 5 5v40q0 6-6 6H10q-6 0-6-6Z" fill="url(#mfg${fi})"/><path d="M9 26.5h82" stroke="#fff" stroke-opacity=".45" stroke-width="1.2"/></svg>
+      <span class="pk" style="--fb:${PK[fi].b};--ff:${PK[fi].f}" aria-hidden="true"><span class="pk-back"></span><span class="pk-cards">${PK[fi].img.map(n => `<img src="works/peek/${n}.webp" alt="" loading="lazy" decoding="async">`).join('')}</span><span class="pk-front"></span></span>
       <span class="mf-name">${esc(f[L].n)}</span>
       <span class="mf-lead">${esc(f[L].lead)}</span>
       <span class="mf-count">${f.items.length} ${esc(T[L].works)}</span>
