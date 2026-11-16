@@ -258,14 +258,14 @@ p{margin:0}
 .js-scene .stage{position:sticky;top:0}
 @media (max-width:767px){.js-scene .scene{height:260svh}}
 /* the folders on the screen: real buttons, a yellow folder with its name under it; sizes follow the screen (cqw) */
-.folders{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2.4cqw;width:100%;max-width:86cqw}
+.folders{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1cqw;width:100%;max-width:50cqw}
 .mfold{display:flex;flex-direction:column;align-items:center;gap:.8cqw;min-height:44px;padding:1.4cqw .8cqw;border-radius:1.6cqw;text-align:center;color:#fff;transition:background .2s}
 .mfold:hover{background:rgba(255,255,255,.18)}
 .mfold:focus-visible{outline:3px solid #fff;outline-offset:-3px;box-shadow:inset 0 0 0 6px #164ACA}
 .mf-ico{width:min(100%,11cqw);height:auto;filter:drop-shadow(0 .6cqw .9cqw rgba(10,40,90,.3))} /* about the size of a real desktop icon (user, 2026-10-25) */
-.mf-name{font-size:clamp(11px,2.3cqw,16px);font-weight:600;letter-spacing:calc(-.01em + var(--lsx));line-height:1.2;text-shadow:0 1px 1px rgba(0,0,0,.85),0 1px 3px rgba(0,0,0,.6),0 2px 10px rgba(0,25,70,.55)} /* readable on the white clouds too (audit 2026-11-16) */
+.mf-name{font-size:clamp(10px,1.7cqw,13px);font-weight:600;letter-spacing:calc(-.01em + var(--lsx));line-height:1.2;text-shadow:0 1px 1px rgba(0,0,0,.85),0 1px 3px rgba(0,0,0,.6),0 2px 10px rgba(0,25,70,.55)} /* readable on the white clouds too (audit 2026-11-16) */
 .mf-count{font-size:clamp(9px,1.7cqw,12px);font-weight:500;text-shadow:0 1px 1px rgba(0,0,0,.85),0 1px 3px rgba(0,0,0,.6),0 2px 8px rgba(0,25,70,.55)}
-@media (max-width:767px){.folders{max-width:96cqw;gap:1.6cqw}.mf-name{font-size:12px;white-space:normal;text-wrap:balance}.mf-count{font-size:11px}} /* phone: big enough to read, the name stays on one line */
+@media (max-width:767px){.folders{max-width:80cqw;gap:1cqw}.mf-name{font-size:10px;white-space:normal;text-wrap:balance}.mf-count{font-size:11px}} /* phone: big enough to read, the name stays on one line */
 .mf-lead{display:none}
 .fwin-back{position:fixed;inset:0;z-index:60;background:rgba(20,18,16,.38);display:grid;place-items:center;padding:calc(env(safe-area-inset-top,0px) + 70px) 16px 24px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .fwin-back[hidden]{display:none}
@@ -654,7 +654,7 @@ p{margin:0}
 }
 
 /* the work folders: real folders first (back with a tab, front pocket), with two works just peeking out (user's reference, 2026-11-16) */
-.pk{position:relative;display:block;width:min(100%,18cqw);aspect-ratio:18/14}
+.pk{position:relative;display:block;width:min(100%,7.5cqw);aspect-ratio:18/14}
 .pk-back{position:absolute;left:0;right:0;bottom:0;height:84%;background:var(--fb);border-radius:0 1.4cqw 1.4cqw 1.4cqw;box-shadow:0 .4cqw 1.2cqw rgba(10,40,90,.25)}
 .pk-back::before{content:"";position:absolute;left:0;bottom:100%;width:42%;height:2.2cqw;background:var(--fb);border-radius:1cqw 1.4cqw 0 0}
 .pk-cards{position:absolute;left:14%;right:14%;top:22%;bottom:30%}
@@ -667,7 +667,7 @@ p{margin:0}
 .pk-front{position:absolute;left:0;right:0;bottom:0;height:66%;z-index:3;background:var(--ff);border-radius:1.4cqw;box-shadow:0 -.2cqw .8cqw rgba(0,0,0,.12),inset 0 .2cqw 0 rgba(255,255,255,.4)}
 .mfold .mf-lead{display:none}
 @media (prefers-reduced-motion:reduce){.pk-cards img{transition:none}}
-@media (max-width:767px){.pk{width:min(100%,22cqw)}}
+@media (max-width:767px){.pk{width:min(100%,11cqw)}} /* about the size of a real Mac desktop folder (user 2026-11-16) */
 </style>
 
 <div id="site" dir="ltr" lang="en">
