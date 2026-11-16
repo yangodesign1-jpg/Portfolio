@@ -894,7 +894,6 @@ function renderFolders(){
       <span class="pk" style="--fb:${PK[fi].b};--ff:${PK[fi].f}" aria-hidden="true"><span class="pk-back"></span><span class="pk-cards">${PK[fi].img.map(n => `<img src="works/peek/${n}.webp" alt="" loading="lazy" decoding="async">`).join('')}</span><span class="pk-front"></span></span>
       <span class="mf-name">${esc(f[L].n)}</span>
       <span class="mf-lead">${esc(f[L].lead)}</span>
-      <span class="mf-count">${f.items.length} ${esc(T[L].works)}</span>
     </button>`).join('');
   if (!document.getElementById('fwin')) document.body.insertAdjacentHTML('beforeend', '<div class="fwin-back" id="fwin" hidden><div class="fwin" role="dialog" aria-modal="true" aria-labelledby="fwin-t"><div class="fwin-bar"><button type="button" class="fwin-x" id="fwin-x" aria-label="Close"></button><span class="fwin-dots" aria-hidden="true"><i></i><i></i></span><span class="fwin-t" id="fwin-t"></span></div><p class="fwin-lead" id="fwin-lead"></p><div class="fwin-books" id="fwin-books"></div></div></div>');
   if (openFold != null) paintFold(openFold);
